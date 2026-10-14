@@ -10,6 +10,8 @@ export interface PriceInput {
   standardGuests: number;
   maxGuests: number;
   minNights: number;
+  /** Optional upper bound on nights (settings.max_nights). */
+  maxNights?: number;
   extraAdultPerNight: number | null;
   childPolicy: ChildExtraPolicy;
   /** Per-night charge for a child counted as an extra guest when childPolicy = "reduced". */
@@ -74,13 +76,21 @@ export function amenityLineTotal(
 export function priceStay(input: PriceInput): PriceBreakdown {
   const { nights, adults, children } = input;
   if (!Number.isInteger(nights) || nights < 1) throw new PricingError("A stay must be at least one night.");
-  if (nights < input.minNights) throw new PricingError(`The minimum stay is ${input.minNights} nights.`);
+  if (nights < input.minNights || (input.maxNights !== undefined && nights > input.maxNights)) {
+    throw new PricingError(
+      input.maxNights !== undefined
+        ? `Stays are from ${input.minNights} to ${input.maxNights} nights.`
+        : `The minimum stay is ${input.minNights} nights.`,
+    );
+  }
   if (!Number.isInteger(adults) || adults < 1) throw new PricingError("At least one adult is required.");
   if (!Number.isInteger(children) || children < 0) throw new PricingError("Children must be zero or more.");
 
   const guests = adults + children;
   if (guests > input.maxGuests) {
-    throw new PricingError(`This apartment accommodates at most ${input.maxGuests} guests.`);
+    throw new PricingError(
+      `This apartment accommodates up to ${input.maxGuests} guests. For a larger party, write to us and we will suggest an arrangement.`,
+    );
   }
   const extraGuests = Math.max(0, guests - input.standardGuests);
   if (extraGuests > 0 && input.extraAdultPerNight === null) {

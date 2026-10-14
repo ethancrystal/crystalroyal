@@ -34,6 +34,12 @@ describe("priceStay: three-bedroom nightly totals", () => {
 
 describe("priceStay: validation", () => {
   it("enforces minimum stay", () => expect(() => priceStay({ ...three, minNights: 2 })).toThrow(/minimum stay/));
+  it("enforces min and max nights", () =>
+    expect(() => priceStay({ ...three, nights: 31, maxNights: 30 })).toThrow("Stays are from 1 to 30 nights."));
+  it("party of nine gets the exact message", () =>
+    expect(() => priceStay({ ...three, adults: 5, children: 4 })).toThrow(
+      "This apartment accommodates up to 8 guests. For a larger party, write to us and we will suggest an arrangement.",
+    ));
   it("needs an adult", () => expect(() => priceStay({ ...three, adults: 0 })).toThrow(/adult/));
   it("refuses extra guests when the type has no extra-guest rule", () => {
     expect(() => priceStay({ ...three, standardGuests: 4, maxGuests: 6, extraAdultPerNight: null })).toThrow(PricingError);
