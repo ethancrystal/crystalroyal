@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin · amenities, rates and settings</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 24px;color:#BFB3A0;text-decoration:none;font-size:14px;letter-spacing:.06em}
+.lbl{display:block;font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:6px;color:#595959}
+.inp{width:100%;min-height:44px;border:1px solid #D9D4C7;background:#FBFAF6;padding:8px 12px;font-family:Jost,sans-serif;font-size:15px;color:#2C2C2C}
+.act{min-height:44px;padding:0 20px;font-family:Jost,sans-serif;font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border:1px solid #2C2C2C;background:#2C2C2C;color:#F4F1EA}
+.ghost{background:transparent;color:#2C2C2C}
+th{font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#595959;text-align:left;padding:10px 12px;border-bottom:1px solid #7A5F3B}
+td{padding:12px;border-bottom:1px solid #D9D4C7;font-size:15px}
+.ph{border:1px dashed currentColor;padding:0 4px;color:#9E3B3B}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #C5A880;outline-offset:2px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.5; color: #2C2C2C; display: flex; flex-wrap: wrap; min-height: 2000px;">
+  <nav class="nav" aria-label="Admin" style="flex: 1 1 240px; max-width: 260px; background: #171512; padding: 28px 0; display: flex; flex-direction: column; gap: 2px;">
+    <span style="padding: 0 24px 24px; color: #F3EEE3; font-size: 12px; letter-spacing: .22em;">CRYSTAL ROYAL · ADMIN</span>
+    <a href="AdminDashboard.dc.html">Dashboard</a>
+    <a href="AdminReservation.dc.html">Reservations</a>
+    <a href="AdminCalendar.dc.html">Calendar and blocks</a>
+    <a href="#amen">Amenities</a>
+    <a href="#rates">Rates</a>
+    <a href="#settings" aria-current="page" style="color: #F3EEE3; border-left: 2px solid #C5A880;">Settings</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; padding: 40px 48px; display: flex; flex-direction: column; gap: 48px;">
+    <div role="status" style="background: #F1E3C4; border: 1px solid #B4862B; padding: 14px 18px; font-size: 15px;"><strong style="font-weight: 500;">11 values still need the owner.</strong> Values in dashed red are placeholders. Online payment stays marked as not live until every bank field is set.</div>
+
+    <section id="amen" aria-labelledby="am-h" style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;"><h2 id="am-h" class="display" style="font-size: 36px;">Amenities</h2><button type="button" class="act ghost">Add an amenity</button></div>
+      <div style="overflow-x: auto;">
+        <table style="border-collapse: collapse; width: 100%; min-width: 720px;">
+          <thead><tr><th scope="col">Name</th><th scope="col">Pricing</th><th scope="col">Price, PKR</th><th scope="col">Max qty</th><th scope="col">Shown</th><th scope="col"><span style="position: absolute; left: -9999px;">Edit</span></th></tr></thead>
+          <tbody>
+            <sc-for list="{{amenities}}" as="a" hint-placeholder-count="8">
+              <tr><td>{{a.name}}</td><td>{{a.unit}}</td><td><span class="ph">[__]</span></td><td class="num">{{a.max}}</td><td>Yes</td><td style="text-align: right;"><a href="#">Edit</a></td></tr>
+            </sc-for>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="rates" aria-labelledby="rt-h" style="display: flex; flex-direction: column; gap: 14px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-end;"><h2 id="rt-h" class="display" style="font-size: 36px;">Rates</h2><button type="button" class="act ghost">Schedule a new rate</button></div>
+      <div style="overflow-x: auto;">
+        <table style="border-collapse: collapse; width: 100%; min-width: 720px;">
+          <thead><tr><th scope="col">Apartment</th><th scope="col">Nightly rate</th><th scope="col">Extra adult per night</th><th scope="col">Standard / max guests</th><th scope="col">Effective from</th></tr></thead>
+          <tbody>
+            <tr><td>Three-bedroom with lounge</td><td class="num">25,000</td><td class="num">5,000</td><td class="num">6 / 8</td><td class="num">1 Oct 2026</td></tr>
+            <tr><td>Two-bedroom with lounge</td><td class="num">17,000</td><td><span class="ph">[__ or none]</span></td><td><span class="ph">[__]</span> / <span class="ph">[__]</span></td><td class="num">1 Oct 2026</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #595959;">A stay is priced at the latest rate effective on its arrival date. Until the two-bedroom occupancy is set, it is reserved directly with the property.</p>
+    </section>
+
+    <section id="settings" aria-labelledby="st-h" style="display: flex; flex-direction: column; gap: 20px;">
+      <h2 id="st-h" class="display" style="font-size: 36px;">Settings</h2>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px;">
+        <div><label class="lbl" for="tax">Tax rate, percent</label><input class="inp" id="tax" placeholder="[__]"></div>
+        <div><label class="lbl" for="taxl">Tax label</label><input class="inp" id="taxl" placeholder="[Applicable taxes]"></div>
+        <div><label class="lbl" for="hold">Hold, hours</label><input class="inp num" id="hold" value="12"></div>
+        <div><label class="lbl" for="dep">Deposit policy</label><select class="inp" id="dep"><option selected="selected">Full stay to confirm</option><option>50% to confirm, balance at check-in</option></select></div>
+        <div><label class="lbl" for="canc">Free cancellation, days before</label><input class="inp" id="canc" placeholder="[__]"></div>
+        <div><label class="lbl" for="child">Child as guest 7 or 8</label><select class="inp" id="child"><option selected="selected">Same as adult</option><option>Reduced rate</option><option>Free</option></select></div>
+        <div><label class="lbl" for="wa">WhatsApp number</label><input class="inp" id="wa" placeholder="[92XXXXXXXXXX]"></div>
+        <div><label class="lbl" for="ci">Check-in / check-out</label><input class="inp" id="ci" placeholder="[15:00] / [11:00]"></div>
+      </div>
+
+      <fieldset style="border: 1px solid #7A5F3B; padding: 24px; margin: 0; display: flex; flex-direction: column; gap: 16px;">
+        <legend class="eyebrow" style="padding: 0 8px; color: #7A5F3B;">Meezan Bank details, shown to guests</legend>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px;">
+          <div><label class="lbl" for="bt">Account title</label><input class="inp" id="bt" placeholder="[Crystal Royal Apartment]"></div>
+          <div><label class="lbl" for="bn">Account number</label><input class="inp" id="bn" placeholder="[__________]"></div>
+          <div><label class="lbl" for="bi">IBAN</label><input class="inp" id="bi" placeholder="[PK__ MEZN ____ ____ ____ ____]"></div>
+          <div><label class="lbl" for="bb">Branch name and code</label><input class="inp" id="bb" placeholder="[Branch name and code]"></div>
+          <div><label class="lbl" for="bs">SWIFT</label><input class="inp" id="bs" placeholder="[MEZNPKKA — confirm]"></div>
+          <div><label class="lbl" for="br">Raast ID, optional</label><input class="inp" id="br" placeholder="[optional]"></div>
+        </div>
+        <sc-if value="{{confirming}}" hint-placeholder-val="{{false}}">
+          <div role="alertdialog" aria-labelledby="cf-h" style="background: #171512; color: #F3EEE3; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+            <p id="cf-h" style="margin: 0; font-weight: 500;">Confirm the bank details guests will pay into</p>
+            <p style="margin: 0; font-size: 14px; color: #BFB3A0;">Every new payment page will show these details. Check the IBAN against your Meezan Bank statement, digit by digit.</p>
+            <div style="display: flex; gap: 10px;"><button type="button" class="act" style="background: #C5A880; border-color: #C5A880; color: #171512;" onClick="{{done}}">Yes, save these details</button><button type="button" class="act ghost" style="color: #F3EEE3; border-color: #F3EEE3;" onClick="{{done}}">Go back</button></div>
+          </div>
+        </sc-if>
+        <button type="button" class="act" style="align-self: flex-start;" onClick="{{save}}">Save bank details</button>
+      </fieldset>
+
+      <section aria-labelledby="em-h" style="display: flex; flex-direction: column; gap: 10px;">
+        <h3 id="em-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Email previews</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+          <button type="button" class="act ghost">Reservation received</button><button type="button" class="act ghost">Receipt received, to owner</button><button type="button" class="act ghost">Confirmed</button><button type="button" class="act ghost">Hold expired</button><button type="button" class="act ghost">Cancelled</button>
+        </div>
+      </section>
+    </section>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2000}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { confirming: false }; }
+  renderVals() {
+    return {
+      confirming: this.state.confirming,
+      save: () => this.setState({ confirming: true }),
+      done: () => this.setState({ confirming: false }),
+      amenities: [
+        { name: 'Airport transfer', unit: 'per trip', max: 4 }, { name: 'Breakfast for the party', unit: 'per guest per night', max: 1 },
+        { name: 'Daily housekeeping', unit: 'per night', max: 1 }, { name: 'Early check-in', unit: 'per stay', max: 1 },
+        { name: 'Late check-out', unit: 'per stay', max: 1 }, { name: 'Extra bedding or cot', unit: 'per night', max: 2 },
+        { name: 'Kitchen pre-stocked', unit: 'per stay', max: 1 }, { name: 'Driver on call', unit: 'per day', max: 10 }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+{
+  "v": 3,
+  "createdOnFiles": { "v": 1, "at": "2026-10-13T17:05:00Z" },
+  "title": "Crystal Royal Apartment — Booking Site Design",
+  "launch": { "view": "canvas" },
+  "pages": [],
+  "boards": {
+    "Main.dc.html": { "x": 0, "y": 0, "w": 1440, "h": 4700, "title": "01 Home · desktop", "expand": "fill", "is_interactive": true },
+    "HomeMobile.dc.html": { "x": 1520, "y": 0, "w": 390, "h": 6200, "title": "01 Home · mobile 390", "expand": "fill", "is_interactive": true },
+    "Apartment.dc.html": { "x": 1990, "y": 0, "w": 1440, "h": 3600, "title": "02 Apartment · three-bedroom", "expand": "fill", "is_interactive": true },
+    "ApartmentMobile.dc.html": { "x": 3510, "y": 0, "w": 390, "h": 5200, "title": "02 Apartment · mobile 390", "expand": "fill", "is_interactive": true },
+
+    "Reserve1.dc.html": { "x": 0, "y": 6600, "w": 1440, "h": 1400, "title": "03 Reserve 1/4 · Dates and guests", "expand": "fill", "is_interactive": true },
+    "Reserve2.dc.html": { "x": 1520, "y": 6600, "w": 1440, "h": 1400, "title": "04 Reserve 2/4 · At your service", "expand": "fill", "is_interactive": true },
+    "Reserve3.dc.html": { "x": 3040, "y": 6600, "w": 1440, "h": 1500, "title": "05 Reserve 3/4 · Your details", "expand": "fill", "is_interactive": true },
+    "Reserve4.dc.html": { "x": 4560, "y": 6600, "w": 1440, "h": 1500, "title": "06 Reserve 4/4 · Review and reserve", "expand": "fill", "is_interactive": true },
+    "ReserveMobile.dc.html": { "x": 6080, "y": 6600, "w": 390, "h": 2300, "title": "03 Reserve 1/4 · mobile 390", "expand": "fill", "is_interactive": true },
+
+    "Payment.dc.html": { "x": 0, "y": 9300, "w": 1440, "h": 1900, "title": "07 Payment", "expand": "fill", "is_interactive": true },
+    "PaymentMobile.dc.html": { "x": 1520, "y": 9300, "w": 390, "h": 2900, "title": "07 Payment · mobile 390", "expand": "fill", "is_interactive": true },
+    "Status.dc.html": { "x": 1990, "y": 9300, "w": 1440, "h": 1400, "title": "08 Reservation status", "expand": "fill", "is_interactive": true },
+    "Confirmed.dc.html": { "x": 3510, "y": 9300, "w": 1440, "h": 1900, "title": "09 Confirmed · voucher", "expand": "fill", "is_interactive": true },
+    "States.dc.html": { "x": 5030, "y": 9300, "w": 1440, "h": 1700, "title": "10 States and errors", "expand": "fill" },
+
+    "AdminDashboard.dc.html": { "x": 0, "y": 12600, "w": 1440, "h": 1300, "title": "11 Admin · dashboard", "expand": "fill", "is_interactive": true },
+    "AdminReservation.dc.html": { "x": 1520, "y": 12600, "w": 1440, "h": 1600, "title": "12 Admin · reservation detail", "expand": "fill", "is_interactive": true },
+    "AdminCalendar.dc.html": { "x": 3040, "y": 12600, "w": 1440, "h": 1300, "title": "13 Admin · calendar and blocks", "expand": "fill", "is_interactive": true },
+    "AdminSettings.dc.html": { "x": 4560, "y": 12600, "w": 1440, "h": 2000, "title": "14 Admin · rates and settings", "expand": "fill", "is_interactive": true },
+
+    "Tokens.dc.html": { "x": 0, "y": 15000, "w": 1440, "h": 2300, "title": "Tokens and components" }
+  },
+  "order": [
+    "Main.dc.html", "HomeMobile.dc.html", "Apartment.dc.html", "ApartmentMobile.dc.html",
+    "Reserve1.dc.html", "Reserve2.dc.html", "Reserve3.dc.html", "Reserve4.dc.html", "ReserveMobile.dc.html",
+    "Payment.dc.html", "PaymentMobile.dc.html", "Status.dc.html", "Confirmed.dc.html", "States.dc.html",
+    "AdminDashboard.dc.html", "AdminReservation.dc.html", "AdminCalendar.dc.html", "AdminSettings.dc.html",
+    "Tokens.dc.html"
+  ],
+  "notes": {
+    "rowGuest": { "x": 0, "y": -300, "text": "Guest site", "kind": "title1", "maxW": 3900 },
+    "rowReserve": { "x": 0, "y": 6300, "text": "Reserve flow", "kind": "title1", "maxW": 6470 },
+    "rowPayment": { "x": 0, "y": 9000, "text": "Payment and status", "kind": "title1", "maxW": 6470 },
+    "rowAdmin": { "x": 0, "y": 12300, "text": "Admin console", "kind": "title1", "maxW": 6000 },
+    "rowTokens": { "x": 0, "y": 14700, "text": "Tokens and components", "kind": "title1", "maxW": 1440 },
+    "openDecisions": {
+      "x": -780, "y": 0, "w": 680, "maxH": 2200, "size": "m", "fill": "orange",
+      "text": "Open decisions for the owner (every [bracketed] value on these boards)\n\n1. Meezan Bank: account title, account number, IBAN, branch name and code, SWIFT, optional Raast ID. Affects: Payment, Confirmed, Admin settings. Unresolved: payment page shows a 'Do not transfer yet' banner.\n\n2. Tax rate and label (e.g. Sindh Sales Tax). Affects: every price summary. Unresolved: totals read 'before tax' and say 'plus applicable taxes'.\n\n3. Deposit policy: full stay up front or 50%. Affects: Details, Review, Payment. Default shown: full.\n\n4. Free cancellation window (days before arrival). Affects: Review, Confirmed, Terms. Unresolved: shown as [__ days].\n\n5. Hold hours for an unpaid reservation. Brief says 12; confirm.\n\n6. Child as guest 7 or 8: same as adult PKR 5,000, a reduced rate, or free. Affects: Reserve 1, summaries. Default shown: same as adult.\n\n7. Two-bedroom: standard and maximum occupancy, extra-guest rule, bathrooms, beds. Until set, it cannot be reserved online and shows 'Occupancy confirmed directly with the property'.\n\n8. Amenity prices (all eight). Until set, an amenity can be requested but is quoted separately and is not added to the total.\n\n9. Contact: WhatsApp number, display phone, email, domain, street address, neighbourhood.\n\n10. Check-in and check-out times; house rules; reply-time promise; kitchen equipment.\n\n11. Photography of the real apartments. All images are labelled plates; no stock interiors.\n\nRates fixed by the owner (8 Oct 2026): three-bedroom PKR 25,000/night, 6 standard, 8 max, PKR 5,000 per additional adult per night; two-bedroom PKR 17,000/night. All plus applicable taxes. Rates as of October 2026, subject to change."
+    }
+  },
+  "designSystems": []
+}

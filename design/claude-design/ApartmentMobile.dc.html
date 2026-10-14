@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Three-bedroom · mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.ph{border:1px dashed currentColor;padding:0 5px;opacity:.85}
+.plate{background:#221F1B;color:#BFB3A0;display:flex;align-items:center;justify-content:center;text-align:center;padding:12px;font-size:11px;letter-spacing:.06em}
+.btn-gold{display:flex;align-items:center;justify-content:center;min-height:52px;background:#C5A880;color:#171512;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.step{width:44px;height:44px;border:1px solid rgba(197,168,128,.6);background:transparent;color:#F3EEE3;font-size:20px}
+.day{height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;font-variant-numeric:tabular-nums}
+a:focus-visible,button:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.6; color: #2C2C2C;">
+  <header style="background: #171512; color: #F3EEE3; height: 64px; padding: 0 16px; display: flex; align-items: center; gap: 12px; border-bottom: 1px solid rgba(197,168,128,.35);">
+    <a href="HomeMobile.dc.html" aria-label="Back to home" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; color: #F3EEE3; text-decoration: none; border: 1px solid rgba(197,168,128,.5);">‹</a>
+    <span style="font-size: 11px; letter-spacing: .2em;">CRYSTAL ROYAL APARTMENT</span>
+  </header>
+  <div class="plate" style="aspect-ratio: 4 / 3;">Photo · three-bedroom lounge at dusk · 1200 × 900</div>
+  <div style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; margin-top: 4px;">
+    <div class="plate" style="aspect-ratio: 1;">Bedroom</div><div class="plate" style="aspect-ratio: 1;">Kitchen</div><div class="plate" style="aspect-ratio: 1;">Bedroom two</div>
+  </div>
+
+  <section style="padding: 32px 16px; display: flex; flex-direction: column; gap: 14px;">
+    <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Serviced apartment · <span class="ph">[Neighbourhood]</span></p>
+    <h1 class="display" style="font-size: 40px;">Three-Bedroom Apartment with Lounge</h1>
+    <p style="margin: 0; font-size: 14px; color: #595959;">3 bedrooms · lounge · sleeps 6, up to 8 · check-in <span class="ph">[15:00]</span> · check-out <span class="ph">[11:00]</span></p>
+  </section>
+
+  <!-- Reservation card under the gallery on mobile -->
+  <section aria-label="Reserve this stay" style="background: #171512; color: #F3EEE3; padding: 28px 16px; display: flex; flex-direction: column; gap: 18px;">
+    <div><span style="font-family: 'Cormorant Garamond', serif; font-size: 42px; color: #C5A880; font-weight: 300;">25,000</span> <span style="color: #BFB3A0; font-size: 13px;">PKR per night, plus applicable taxes</span></div>
+    <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid rgba(197,168,128,.45);">
+      <div style="padding: 10px 14px; border-right: 1px solid rgba(197,168,128,.45);"><span class="eyebrow" style="color: #BFB3A0; font-size: 10px;">Arrival</span><br>Mon 2 Nov</div>
+      <div style="padding: 10px 14px;"><span class="eyebrow" style="color: #BFB3A0; font-size: 10px;">Departure</span><br>Thu 5 Nov</div>
+    </div>
+    <div style="display: flex; align-items: center; justify-content: space-between;"><span>Adults</span><span style="display: flex; align-items: center; gap: 12px;"><button type="button" class="step" aria-label="Fewer adults">−</button><span class="num">2</span><button type="button" class="step" aria-label="More adults">+</button></span></div>
+    <div style="display: flex; align-items: center; justify-content: space-between;"><span>Children</span><span style="display: flex; align-items: center; gap: 12px;"><button type="button" class="step" aria-label="Fewer children">−</button><span class="num">4</span><button type="button" class="step" aria-label="More children">+</button></span></div>
+    <div style="display: flex; justify-content: space-between; border-top: 1px solid rgba(197,168,128,.35); padding-top: 14px;"><span>Total before tax · 3 nights</span><span class="num">PKR 75,000</span></div>
+    <a href="ReserveMobile.dc.html" class="btn-gold">Reserve this stay</a>
+  </section>
+
+  <section style="padding: 40px 16px; display: flex; flex-direction: column; gap: 14px;">
+    <p style="margin: 0;">A fully serviced apartment with three bedrooms and a lounge, arranged so a family can share long evenings and still keep their own rooms.</p>
+    <p style="margin: 0; color: #595959;"><span class="ph">[Description of finishes, view and kitchen to be supplied by the property.]</span></p>
+    <h2 class="display" style="font-size: 30px; margin-top: 16px;">The rooms</h2>
+    <ul style="list-style: none; margin: 0; padding: 0;">
+      <li style="padding: 12px 0; border-bottom: 1px solid #D9D4C7;">Bedroom one · <span class="ph">[bed configuration]</span></li>
+      <li style="padding: 12px 0; border-bottom: 1px solid #D9D4C7;">Bedroom two · <span class="ph">[bed configuration]</span></li>
+      <li style="padding: 12px 0; border-bottom: 1px solid #D9D4C7;">Bedroom three · <span class="ph">[bed configuration]</span></li>
+      <li style="padding: 12px 0; border-bottom: 1px solid #D9D4C7;">Lounge · <span class="ph">[seating and dining]</span></li>
+      <li style="padding: 12px 0; border-bottom: 1px solid #D9D4C7;">Bathrooms · <span class="ph">[__]</span></li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="mcal" style="padding: 0 16px 40px; display: flex; flex-direction: column; gap: 12px;">
+    <h2 id="mcal" class="display" style="font-size: 30px;">Availability</h2>
+    <div style="display: flex; justify-content: space-between; align-items: center;"><button type="button" aria-label="Previous month" style="width: 44px; height: 44px; border: 1px solid #2C2C2C; background: transparent;">‹</button><span class="eyebrow" style="color: #7A5F3B;">November 2026</span><button type="button" aria-label="Next month" style="width: 44px; height: 44px; border: 1px solid #2C2C2C; background: transparent;">›</button></div>
+    <div role="grid" aria-label="November 2026" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));">
+      <sc-for list="{{wd}}" as="w"><div class="day" style="height: 28px; font-size: 10px; letter-spacing: .12em; color: #595959;">{{w}}</div></sc-for>
+      <sc-for list="{{days}}" as="d"><div class="day" role="gridcell" aria-label="{{d.aria}}" style="height: 40px; {{d.style}}">{{d.n}}</div></sc-for>
+    </div>
+    <p style="margin: 0; font-size: 13px; color: #595959;">Dark: your stay. Struck through: reserved. Dashed: unavailable.</p>
+  </section>
+
+  <section style="background: #EBE5D9; padding: 40px 16px; display: flex; flex-direction: column; gap: 12px;">
+    <h2 class="display" style="font-size: 30px;">Rate by party size</h2>
+    <table style="border-collapse: collapse; width: 100%; font-size: 15px;">
+      <tbody>
+        <tr><th scope="row" style="text-align: left; font-weight: 400; padding: 12px 0; border-bottom: 1px solid #D9D4C7;">Up to 6 guests</th><td class="num" style="text-align: right; border-bottom: 1px solid #D9D4C7;">PKR 25,000</td></tr>
+        <tr><th scope="row" style="text-align: left; font-weight: 400; padding: 12px 0; border-bottom: 1px solid #D9D4C7;">7 guests</th><td class="num" style="text-align: right; border-bottom: 1px solid #D9D4C7;">PKR 30,000</td></tr>
+        <tr><th scope="row" style="text-align: left; font-weight: 400; padding: 12px 0; border-bottom: 1px solid #D9D4C7;">8 guests</th><td class="num" style="text-align: right; border-bottom: 1px solid #D9D4C7;">PKR 35,000</td></tr>
+      </tbody>
+    </table>
+    <p class="display" style="font-size: 22px; font-weight: 400; margin-top: 12px;">Three-Bedroom Apartment with Lounge — PKR 25,000 per night, plus applicable taxes</p>
+    <p style="margin: 0; color: #595959; font-size: 15px;">Accommodates up to 6 guests as standard, with a maximum capacity of 8 guests. Each additional adult (guests 7 and 8) is charged PKR 5,000 per night, plus applicable taxes.</p>
+    <p style="margin: 0; color: #595959; font-size: 13px;">Rates as of October 2026, subject to change.</p>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":5200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const marks = { 2: 'sel', 3: 'sel', 4: 'sel', 5: 'end', 12: 'booked', 13: 'booked', 14: 'booked', 20: 'booked', 21: 'booked', 27: 'blocked', 28: 'blocked' };
+    const days = [];
+    for (let i = 0; i < 6; i++) days.push({ n: '', aria: '', style: '' });
+    for (let d = 1; d <= 30; d++) {
+      const m = marks[d];
+      let style = '';
+      let aria = 'November ' + d + ', available';
+      if (m === 'sel') { style = 'background:#171512;color:#F3EEE3;'; aria = 'November ' + d + ', in your stay'; }
+      if (m === 'end') { style = 'border:1px solid #171512;'; aria = 'November ' + d + ', departure'; }
+      if (m === 'booked') { style = 'background:#D9D4C7;color:#595959;text-decoration:line-through;'; aria = 'November ' + d + ', reserved'; }
+      if (m === 'blocked') { style = 'border:1px dashed #595959;color:#595959;'; aria = 'November ' + d + ', unavailable'; }
+      days.push({ n: String(d), aria: aria, style: style });
+    }
+    return { wd: ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'], days: days };
+  }
+}
+</script>
+</body>
+</html>

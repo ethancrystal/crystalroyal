@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Your reservation · CRA-2611-0042</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.btn-dark{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;background:#2C2C2C;color:#F4F1EA;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+a:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 17px; line-height: 1.6; color: #2C2C2C;">
+  <header style="background: #171512; color: #F3EEE3; border-bottom: 1px solid rgba(197,168,128,.35);">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 0 48px; height: 76px; display: flex; align-items: center;"><a href="Main.dc.html" style="color: #F3EEE3; text-decoration: none; font-size: 13px; letter-spacing: .22em;">CRYSTAL ROYAL APARTMENT</a></div>
+  </header>
+  <main style="max-width: 1180px; margin: 0 auto; padding: 72px 48px 120px; display: flex; flex-wrap: wrap; gap: 72px; align-items: flex-start;">
+    <div style="flex: 1 1 420px; display: flex; flex-direction: column; gap: 36px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <p class="eyebrow num" style="margin: 0; color: #7A5F3B;">Reservation CRA-2611-0042</p>
+        <h1 class="display" style="font-size: 56px;">Your stay</h1>
+        <p style="margin: 0; display: flex; align-items: center; gap: 10px;">
+          <span style="width: 10px; height: 10px; background: {{toneColor}};" aria-hidden="true"></span>
+          <span style="font-weight: 500;">{{statusWord}}</span>
+        </p>
+      </div>
+      <ol aria-label="Progress" style="list-style: none; margin: 0; padding: 0;">
+        <sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+          <li aria-current="{{s.current}}" style="display: flex; gap: 20px; min-height: 92px;">
+            <div style="display: flex; flex-direction: column; align-items: center; width: 22px;">
+              <span style="width: 22px; height: 22px; border: 1px solid {{s.ring}}; background: {{s.fill}}; flex-shrink: 0;"></span>
+              <span style="flex: 1; width: 1px; background: {{s.line}};"></span>
+            </div>
+            <div style="padding-bottom: 24px;">
+              <p style="margin: 0; font-weight: 500; color: {{s.text}};">{{s.title}}</p>
+              <p style="margin: 2px 0 0; font-size: 14px; color: #595959;">{{s.detail}}</p>
+            </div>
+          </li>
+        </sc-for>
+      </ol>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap; align-items: center;">
+        <a href="{{ctaHref}}" class="btn-dark">{{ctaText}}</a>
+        <a href="#" style="font-size: 15px;">Need help? WhatsApp us</a>
+      </div>
+    </div>
+
+    <aside aria-label="Reservation summary" style="flex: 1 1 420px; background: #171512; color: #F3EEE3; padding: 36px; display: flex; flex-direction: column; gap: 18px;">
+      <p class="eyebrow" style="margin: 0; color: #C5A880;">Summary</p>
+      <p class="display" style="font-size: 30px; font-weight: 400;">Three-Bedroom Apartment with Lounge</p>
+      <dl style="margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 10px 24px; font-size: 15px;">
+        <dt style="color: #BFB3A0;">Arrival</dt><dd style="margin: 0;">Monday 2 November 2026</dd>
+        <dt style="color: #BFB3A0;">Departure</dt><dd style="margin: 0;">Thursday 5 November 2026</dd>
+        <dt style="color: #BFB3A0;">Guests</dt><dd style="margin: 0;">2 adults, 4 children</dd>
+        <dt style="color: #BFB3A0;">Amount</dt><dd class="num" style="margin: 0;">PKR 75,000 before tax</dd>
+        <dt style="color: #BFB3A0;">Receipt</dt><dd style="margin: 0;">{{receipt}}</dd>
+      </dl>
+    </aside>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"stage":{"editor":"enum","options":["reserved","payment_submitted","confirmed","checked_in"],"default":"payment_submitted"},"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const stage = this.props.stage ?? 'payment_submitted';
+    const order = ['reserved', 'payment_submitted', 'confirmed', 'checked_in'];
+    const idx = order.indexOf(stage);
+    const defs = [
+      ['Reserved', 'Tue 13 Oct, 11:40 · dates held until 23:40'],
+      ['Payment received', idx >= 1 ? 'Receipt uploaded Tue 13 Oct, 14:05' : 'Awaiting your transfer receipt'],
+      ['Confirmed by Crystal Royal', idx >= 2 ? 'Transfer verified Tue 13 Oct, 16:20' : 'Usually within a few hours of your receipt'],
+      ['Check-in', 'Monday 2 November, from [15:00]']
+    ];
+    const steps = defs.map(([title, detail], i) => {
+      const done = i < idx || (i === idx && stage === 'checked_in');
+      const current = i === idx;
+      return {
+        title: title + (current ? ' · current' : done ? ' · done' : ''), detail: detail,
+        current: current ? 'step' : 'false',
+        ring: done || current ? '#7A5F3B' : '#D9D4C7',
+        fill: done ? '#3F7A5A' : current ? (stage === 'confirmed' || stage === 'checked_in' ? '#3F7A5A' : '#B4862B') : 'transparent',
+        line: i < idx ? '#7A5F3B' : '#D9D4C7',
+        text: done || current ? '#2C2C2C' : '#595959'
+      };
+    });
+    const words = { reserved: 'Reserved, awaiting transfer', payment_submitted: 'Payment received, being verified', confirmed: 'Confirmed', checked_in: 'Checked in' };
+    return {
+      steps: steps,
+      statusWord: words[stage],
+      toneColor: stage === 'confirmed' || stage === 'checked_in' ? '#3F7A5A' : '#B4862B',
+      receipt: idx >= 1 ? 'Received, ' + (idx >= 2 ? 'verified' : 'being verified') : 'Not yet uploaded',
+      ctaHref: idx >= 2 ? 'Confirmed.dc.html' : 'Payment.dc.html',
+      ctaText: idx >= 2 ? 'View your voucher' : 'Payment instructions'
+    };
+  }
+}
+</script>
+</body>
+</html>

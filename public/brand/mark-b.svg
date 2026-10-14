@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Crystal Royal Apartment crown-diamond mark, hairline">
+  <title>Crystal Royal Apartment — mark B, hairline (gold line; recolour the stroke as needed)</title>
+  <g fill="none" stroke="#C5A880" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round">
+    <polygon points="56,78 56,44 78,62 100,30 122,62 144,44 144,78"/>
+    <line x1="56" y1="90" x2="144" y2="90"/>
+    <polygon points="60,100 140,100 156,124 100,188 44,124"/>
+    <line x1="44" y1="124" x2="156" y2="124"/>
+    <line x1="76" y1="100" x2="64" y2="124"/>
+    <line x1="124" y1="100" x2="136" y2="124"/>
+    <line x1="72" y1="124" x2="100" y2="188"/>
+    <line x1="128" y1="124" x2="100" y2="188"/>
+  </g>
+</svg>

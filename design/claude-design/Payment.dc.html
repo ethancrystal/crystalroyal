@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Payment · CRA-2611-0042</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#171512}
+*{box-sizing:border-box}
+a{color:#C5A880}a:hover{color:#E2C58F}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.ph{border:1px dashed currentColor;padding:0 5px;opacity:.9}
+.copy{min-width:88px;height:40px;border:1px solid rgba(197,168,128,.6);background:transparent;color:#F3EEE3;font-family:Jost,sans-serif;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer}
+.copy:hover{background:#C5A880;color:#171512}
+.btn-gold{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border:1px solid #C5A880;color:#F3EEE3;background:transparent;text-decoration:none;font-family:Jost,sans-serif;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.btn-gold:hover{background:#C5A880;color:#171512}
+a:focus-visible,button:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 17px; line-height: 1.6; color: #F3EEE3; background: #171512;">
+  <header style="border-bottom: 1px solid rgba(197,168,128,.35);">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 0 48px; height: 76px; display: flex; align-items: center; justify-content: space-between;">
+      <a href="Main.dc.html" style="color: #F3EEE3; text-decoration: none; font-size: 13px; letter-spacing: .22em;">CRYSTAL ROYAL APARTMENT</a>
+      <a href="Status.dc.html" style="font-size: 14px;">View reservation status</a>
+    </div>
+  </header>
+
+  <sc-if value="{{pending}}" hint-placeholder-val="{{true}}">
+    <div role="alert" style="background: #9E3B3B; color: #FBFAF6;">
+      <div style="max-width: 1180px; margin: 0 auto; padding: 14px 48px; font-size: 15px;"><strong style="font-weight: 500;">Not live.</strong> The bank details below are placeholders awaiting the owner. Do not make a transfer until this notice is gone.</div>
+    </div>
+  </sc-if>
+
+  <main style="max-width: 1180px; margin: 0 auto; padding: 72px 48px 120px; display: flex; flex-direction: column; gap: 56px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 48px; justify-content: space-between; align-items: flex-end;">
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <p class="eyebrow" style="margin: 0; color: #C5A880;">Reservation <span class="num" style="letter-spacing: .12em;">CRA-2611-0042</span></p>
+        <h1 class="display" style="font-size: 60px;">Settle your stay by transfer</h1>
+        <p style="margin: 0; color: #BFB3A0;">Three-Bedroom Apartment with Lounge · 2 – 5 November 2026 · 6 guests</p>
+      </div>
+      <div style="text-align: right;">
+        <p class="eyebrow" style="margin: 0 0 6px; color: #BFB3A0;">Amount due, PKR</p>
+        <p class="num" style="margin: 0; font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: 96px; line-height: .95; color: #C5A880;">75,000</p>
+        <p style="margin: 6px 0 0; font-size: 13px; color: #BFB3A0;">Before tax · plus applicable taxes</p>
+      </div>
+    </div>
+    <p style="margin: 0; padding: 16px 0; border-top: 1px solid rgba(197,168,128,.35); border-bottom: 1px solid rgba(197,168,128,.35); color: #BFB3A0; font-size: 15px;">Your dates are held until <span style="color: #F3EEE3;">Tuesday 13 October, 23:40 Karachi time</span>. After that they are released.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 48px; align-items: flex-start;">
+      <!-- Bank card -->
+      <section aria-labelledby="bank-h" style="flex: 1 1 520px; min-width: 0; background: #221F1B; border: 1px solid #C5A880;">
+        <div style="padding: 24px 28px; border-bottom: 1px solid rgba(197,168,128,.35); display: flex; align-items: center; justify-content: space-between;">
+          <h2 id="bank-h" class="eyebrow" style="margin: 0; color: #C5A880;">Meezan Bank Limited</h2>
+          <span style="font-size: 13px; color: #BFB3A0;">Bank transfer · IBFT or Raast</span>
+        </div>
+        <dl style="margin: 0;">
+          <sc-for list="{{rows}}" as="r" hint-placeholder-count="6">
+            <div style="display: flex; align-items: center; gap: 16px; padding: 16px 28px; border-bottom: 1px solid rgba(197,168,128,.18);">
+              <dt style="width: 150px; flex-shrink: 0; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #BFB3A0;">{{r.label}}</dt>
+              <dd class="num" style="margin: 0; flex: 1; min-width: 0; overflow-wrap: anywhere;"><span class="ph">{{r.value}}</span></dd>
+              <button type="button" class="copy" onClick="{{r.copy}}" aria-label="{{r.aria}}">{{r.copyText}}</button>
+            </div>
+          </sc-for>
+        </dl>
+        <div style="padding: 16px 28px; display: flex; align-items: center; gap: 16px;">
+          <span style="width: 150px; flex-shrink: 0; font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: #BFB3A0;">Reference</span>
+          <span class="num" style="flex: 1; color: #C5A880;">CRA-2611-0042</span>
+          <button type="button" class="copy" onClick="{{copyRef}}" aria-label="Copy reference">{{refText}}</button>
+        </div>
+      </section>
+
+      <!-- Instructions and upload -->
+      <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 32px;">
+        <section aria-labelledby="how-h">
+          <h2 id="how-h" class="eyebrow" style="margin: 0 0 14px; color: #C5A880;">How to settle</h2>
+          <ol style="margin: 0; padding-left: 22px; display: flex; flex-direction: column; gap: 8px; color: #BFB3A0;">
+            <li>Transfer exactly <span class="num" style="color: #F3EEE3;">PKR 75,000</span> to the account shown.</li>
+            <li>Write <span class="num" style="color: #F3EEE3;">CRA-2611-0042</span> in the transfer remarks.</li>
+            <li>Upload the receipt here, or send it on WhatsApp.</li>
+            <li>We verify the transfer and confirm your stay, usually within <span class="ph">[__ hours]</span>.</li>
+          </ol>
+        </section>
+
+        <section aria-labelledby="up-h" style="display: flex; flex-direction: column; gap: 12px;">
+          <h2 id="up-h" class="eyebrow" style="margin: 0; color: #C5A880;">Upload your transfer receipt</h2>
+          <sc-if value="{{isIdle}}" hint-placeholder-val="{{true}}">
+            <label style="min-height: 180px; border: 1px dashed #C5A880; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; text-align: center; padding: 24px; cursor: pointer;">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#C5A880" stroke-width="1.3" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5M4 20h16"></path></svg>
+              <span>Drop the receipt here, or <span style="color: #C5A880; text-decoration: underline;">choose a file</span></span>
+              <span style="font-size: 13px; color: #BFB3A0;">JPG, PNG or PDF, up to 10 MB</span>
+              <input type="file" accept="image/jpeg,image/png,application/pdf" style="position: absolute; width: 1px; height: 1px; opacity: 0;">
+            </label>
+          </sc-if>
+          <sc-if value="{{isUploading}}" hint-placeholder-val="{{false}}">
+            <div role="status" style="min-height: 180px; border: 1px solid rgba(197,168,128,.6); display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 24px;">
+              <span>transfer-receipt.png · 1.2 MB</span>
+              <span aria-hidden="true" style="height: 2px; background: rgba(197,168,128,.25); position: relative;"><span style="position: absolute; left: 0; top: 0; bottom: 0; width: 62%; background: #C5A880;"></span></span>
+              <span style="font-size: 13px; color: #BFB3A0;">Uploading, 62 percent</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{isDone}}" hint-placeholder-val="{{false}}">
+            <div role="status" style="min-height: 180px; border: 1px solid #3F7A5A; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 24px;">
+              <span style="display: inline-flex; align-self: flex-start; gap: 8px; align-items: center; background: #3F7A5A; color: #FBFAF6; padding: 4px 12px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;">Receipt received</span>
+              <span>transfer-receipt.png</span>
+              <span style="font-size: 14px; color: #BFB3A0;">Thank you. We are verifying the transfer and will confirm by WhatsApp and email.</span>
+            </div>
+          </sc-if>
+          <sc-if value="{{isRejected}}" hint-placeholder-val="{{false}}">
+            <div role="alert" style="min-height: 180px; border: 1px solid #9E3B3B; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 24px;">
+              <span style="display: inline-flex; align-self: flex-start; background: #9E3B3B; color: #FBFAF6; padding: 4px 12px; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;">Receipt not accepted</span>
+              <span style="font-size: 15px;">Reason from the property: the amount on the receipt is PKR 70,000, not PKR 75,000.</span>
+              <span style="font-size: 14px; color: #BFB3A0;">Your hold has been extended by 12 hours. Please upload a new receipt.</span>
+            </div>
+          </sc-if>
+          <a href="#" style="font-size: 15px;">Send receipt on WhatsApp instead</a>
+        </section>
+
+        <section aria-labelledby="next-h" style="border-top: 1px solid rgba(197,168,128,.35); padding-top: 24px;">
+          <h2 id="next-h" class="eyebrow" style="margin: 0 0 10px; color: #C5A880;">What happens next</h2>
+          <p style="margin: 0; color: #BFB3A0; font-size: 15px;">Once the transfer is verified, your status changes to Confirmed and we send your voucher with directions. Your reservation link works on any device.</p>
+          <p style="margin: 16px 0 0;"><a href="Status.dc.html" class="btn-gold">Go to your reservation</a></p>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer style="border-top: 1px solid rgba(197,168,128,.2); padding: 24px 48px; text-align: center; font-size: 13px; color: #BFB3A0;">Payments by bank transfer to Meezan Bank; no card details are ever requested.</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"uploadState":{"editor":"enum","options":["idle","uploading","done","rejected"],"default":"idle"},"placeholdersPending":{"editor":"boolean","default":true},"$preview":{"width":1440,"height":1900}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { copied: '' }; }
+  renderVals() {
+    const s = this.props.uploadState ?? 'idle';
+    const copied = this.state.copied;
+    const defs = [
+      ['Bank', 'Meezan Bank Limited'],
+      ['Account title', '[Crystal Royal Apartment]'],
+      ['Account number', '[__________]'],
+      ['IBAN', '[PK__ MEZN ____ ____ ____ ____]'],
+      ['Branch', '[Branch name and code]'],
+      ['SWIFT', '[MEZNPKKA — confirm]'],
+      ['Raast ID', '[optional Raast ID / mobile number]']
+    ];
+    return {
+      pending: this.props.placeholdersPending ?? true,
+      rows: defs.map(([label, value]) => ({ label: label, value: value, aria: 'Copy ' + label.toLowerCase(), copyText: copied === label ? 'Copied' : 'Copy', copy: () => this.setState({ copied: label }) })),
+      copyRef: () => this.setState({ copied: 'ref' }),
+      refText: copied === 'ref' ? 'Copied' : 'Copy',
+      isIdle: s === 'idle', isUploading: s === 'uploading', isDone: s === 'done', isRejected: s === 'rejected'
+    };
+  }
+}
+</script>
+</body>
+</html>

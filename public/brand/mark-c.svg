@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Crystal Royal Apartment crown-diamond mark, solid">
+  <title>Crystal Royal Apartment — mark C, solid (charcoal; facet lines are knocked out in the background colour, set to beige here)</title>
+  <polygon points="56,78 56,44 78,62 100,30 122,62 144,44 144,78" fill="#2C2C2C"/>
+  <rect x="56" y="80" width="88" height="10" fill="#2C2C2C"/>
+  <polygon points="60,100 140,100 156,124 100,188 44,124" fill="#2C2C2C"/>
+  <g fill="none" stroke="#F4F1EA" stroke-width="3" stroke-linecap="round">
+    <line x1="44" y1="124" x2="156" y2="124"/>
+    <line x1="76" y1="100" x2="64" y2="124"/>
+    <line x1="124" y1="100" x2="136" y2="124"/>
+    <line x1="72" y1="124" x2="100" y2="188"/>
+    <line x1="128" y1="124" x2="100" y2="188"/>
+  </g>
+</svg>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin · calendar and blocks</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 24px;color:#BFB3A0;text-decoration:none;font-size:14px;letter-spacing:.06em}
+.tab{min-height:44px;padding:0 18px;border:1px solid #2C2C2C;background:transparent;font-family:Jost,sans-serif;font-size:13px;letter-spacing:.08em;cursor:pointer}
+.cell{min-height:96px;padding:8px;border-right:1px solid #D9D4C7;border-bottom:1px solid #D9D4C7;display:flex;flex-direction:column;gap:4px;font-size:12px;cursor:pointer;background:transparent;text-align:left;font-family:Jost,sans-serif;border-top:0;border-left:0}
+.act{min-height:44px;padding:0 18px;font-family:Jost,sans-serif;font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border:1px solid #2C2C2C;background:#2C2C2C;color:#F4F1EA}
+.inp{width:100%;min-height:44px;border:1px solid #D9D4C7;background:#FBFAF6;padding:8px 12px;font-family:Jost,sans-serif;font-size:15px}
+button:focus-visible{outline:2px solid #C5A880;outline-offset:2px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.5; color: #2C2C2C; display: flex; flex-wrap: wrap; min-height: 1300px;">
+  <nav class="nav" aria-label="Admin" style="flex: 1 1 240px; max-width: 260px; background: #171512; padding: 28px 0; display: flex; flex-direction: column; gap: 2px;">
+    <span style="padding: 0 24px 24px; color: #F3EEE3; font-size: 12px; letter-spacing: .22em;">CRYSTAL ROYAL · ADMIN</span>
+    <a href="AdminDashboard.dc.html">Dashboard</a>
+    <a href="AdminReservation.dc.html">Reservations</a>
+    <a href="AdminCalendar.dc.html" aria-current="page" style="color: #F3EEE3; border-left: 2px solid #C5A880;">Calendar and blocks</a>
+    <a href="AdminSettings.dc.html">Amenities</a>
+    <a href="AdminSettings.dc.html">Rates</a>
+    <a href="AdminSettings.dc.html">Settings</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; padding: 40px 48px; display: flex; flex-direction: column; gap: 24px;">
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <h1 class="display" style="font-size: 44px;">November 2026</h1>
+      <div role="group" aria-label="Apartment" style="display: flex;">
+        <button type="button" class="tab" aria-pressed="true" style="background: #2C2C2C; color: #F4F1EA;">Three-bedroom</button>
+        <button type="button" class="tab" aria-pressed="false" style="border-left: 0;">Two-bedroom</button>
+      </div>
+    </div>
+    <p style="margin: 0; font-size: 14px; color: #595959;">Select nights to block them for maintenance or owner use. Nights with a reservation cannot be blocked.</p>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 28px; align-items: flex-start;">
+      <div style="flex: 999 1 560px; min-width: 0; overflow-x: auto;">
+        <div role="grid" aria-label="November 2026, three-bedroom" style="min-width: 640px; display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-top: 1px solid #D9D4C7; border-left: 1px solid #D9D4C7;">
+          <sc-for list="{{wd}}" as="w"><div style="padding: 8px; font-size: 11px; letter-spacing: .14em; color: #595959; border-right: 1px solid #D9D4C7; border-bottom: 1px solid #D9D4C7;">{{w}}</div></sc-for>
+          <sc-for list="{{cells}}" as="c">
+            <button type="button" class="cell" role="gridcell" aria-label="{{c.aria}}" aria-pressed="{{c.pressed}}" onClick="{{c.toggle}}" disabled="{{c.locked}}" style="background: {{c.bg}};">
+              <span class="num" style="font-size: 14px; color: #2C2C2C;">{{c.n}}</span>
+              <span style="color: {{c.fg}};">{{c.label}}</span>
+            </button>
+          </sc-for>
+        </div>
+      </div>
+      <aside aria-label="Selection" style="flex: 1 1 260px; display: flex; flex-direction: column; gap: 20px;">
+        <section style="background: #EBE5D9; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 class="eyebrow" style="margin: 0; color: #7A5F3B;">Block nights</h2>
+          <p class="num" style="margin: 0; font-size: 15px;">{{selCount}} nights selected</p>
+          <label for="why" style="font-size: 13px; font-weight: 500;">Reason</label>
+          <select id="why" class="inp"><option>Maintenance</option><option>Owner use</option><option>Other</option></select>
+          <button type="button" class="act">Block selected nights</button>
+        </section>
+        <section style="background: #EBE5D9; padding: 20px; display: flex; flex-direction: column; gap: 10px;">
+          <h2 class="eyebrow" style="margin: 0; color: #7A5F3B;">Manual reservation</h2>
+          <p style="margin: 0; font-size: 14px; color: #595959;">For phone or walk-in bookings. Priced by the same engine as online reservations.</p>
+          <button type="button" class="act" style="background: transparent; color: #2C2C2C;">Add a reservation</button>
+        </section>
+      </aside>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { sel: { 27: true, 28: true } }; }
+  renderVals() {
+    const res = { 2: 'CRA-2611-0042 · Ahmed', 3: 'CRA-2611-0042', 4: 'CRA-2611-0042', 12: 'CRA-2611-0047 · held', 13: 'CRA-2611-0047', 14: 'CRA-2611-0047', 20: 'CRA-2611-0051', 21: 'CRA-2611-0051' };
+    const held = { 12: true, 13: true, 14: true };
+    const sel = this.state.sel;
+    const cells = [];
+    for (let i = 0; i < 6; i++) cells.push({ n: '', label: '', aria: 'Empty', pressed: 'false', locked: true, bg: '#EBE5D9', fg: '#595959', toggle: () => {} });
+    for (let d = 1; d <= 30; d++) {
+      const r = res[d];
+      const s = !!sel[d];
+      cells.push({
+        n: String(d),
+        label: r ? r : s ? 'Blocked · maintenance' : '',
+        aria: 'November ' + d + (r ? ', reserved ' + r : s ? ', blocked' : ', free'),
+        pressed: s ? 'true' : 'false',
+        locked: !!r,
+        bg: r ? (held[d] ? '#F1E3C4' : '#DCE8E0') : s ? '#D9D4C7' : 'transparent',
+        fg: r ? '#2C2C2C' : '#595959',
+        toggle: () => this.setState({ sel: Object.assign({}, sel, { [d]: !s }) })
+      });
+    }
+    return { wd: ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'], cells: cells, selCount: Object.keys(sel).filter((k) => sel[k]).length };
+  }
+}
+</script>
+</body>
+</html>

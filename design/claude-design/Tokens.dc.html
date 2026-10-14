@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Tokens and components</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.btn-dark{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border:1px solid #C5A880;color:#F3EEE3;background:transparent;font-family:Jost,sans-serif;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.btn-dark:hover{background:#C5A880;color:#171512}
+.btn-light{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;background:#2C2C2C;color:#F4F1EA;border:1px solid #2C2C2C;font-family:Jost,sans-serif;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase;cursor:pointer}
+.inp-dark{height:52px;border:1px solid rgba(197,168,128,.5);background:#F3EEE3;padding:0 16px;font-family:Jost,sans-serif;font-size:17px;width:100%}
+button:focus-visible,input:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+@keyframes sweep{0%{transform:translateX(-140px) rotate(18deg)}100%{transform:translateX(320px) rotate(18deg)}}
+.sweep{animation:sweep 1200ms ease-out infinite 600ms}
+@media (prefers-reduced-motion: reduce){.sweep{animation:none}}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.6; color: #2C2C2C; padding: 64px 48px; display: flex; flex-direction: column; gap: 56px;">
+  <div><p class="eyebrow" style="margin: 0; color: #7A5F3B;">Faceted Midnight</p><h1 class="display" style="font-size: 56px;">Tokens and components</h1></div>
+
+  <section aria-labelledby="c-h" style="display: flex; flex-direction: column; gap: 16px;">
+    <h2 id="c-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Colour</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;">
+      <sc-for list="{{colors}}" as="c" hint-placeholder-count="16">
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <div style="height: 80px; background: {{c.hex}}; border: 1px solid #D9D4C7;"></div>
+          <span style="font-size: 13px; font-weight: 500;">{{c.name}}</span>
+          <span class="num" style="font-size: 12px; color: #595959;">{{c.hex}} · {{c.use}}</span>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <section aria-labelledby="t-h" style="display: flex; flex-direction: column; gap: 14px;">
+    <h2 id="t-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Type</h2>
+    <div style="display: grid; grid-template-columns: 220px 1fr; gap: 12px 32px; align-items: baseline;">
+      <span style="font-size: 13px; color: #595959;">Display XL · Cormorant 300 · 88</span><span class="display" style="font-size: 88px;">A royal <em>address</em></span>
+      <span style="font-size: 13px; color: #595959;">Display L · Cormorant 300 · 60</span><span class="display" style="font-size: 60px;">Two ways to stay</span>
+      <span style="font-size: 13px; color: #595959;">Display M · Cormorant 400 · 30</span><span class="display" style="font-size: 30px; font-weight: 400;">Three-Bedroom Apartment with Lounge</span>
+      <span style="font-size: 13px; color: #595959;">Rate numeral · Cormorant 300 · 64</span><span class="display num" style="font-size: 64px; color: #7A5F3B;">75,000</span>
+      <span style="font-size: 13px; color: #595959;">Body · Jost 400 · 17 / 1.6</span><span style="font-size: 17px;">Reserve by the night; we take care of the rest.</span>
+      <span style="font-size: 13px; color: #595959;">Price · Jost 500 tabular</span><span class="num" style="font-size: 20px;">PKR 25,000 · 30,000 · 35,000</span>
+      <span style="font-size: 13px; color: #595959;">Eyebrow · Jost 500 · 12 · 0.2em</span><span class="eyebrow" style="color: #7A5F3B;">Serviced apartments · Karachi</span>
+    </div>
+  </section>
+
+  <section aria-labelledby="k-h" style="display: flex; flex-direction: column; gap: 18px;">
+    <h2 id="k-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Components</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 24px;">
+
+      <div style="background: #171512; color: #F3EEE3; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+        <span class="eyebrow" style="color: #C5A880;">Buttons on midnight · inputs</span>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;"><button type="button" class="btn-dark">Reserve your stay</button><button type="button" class="btn-dark" style="background: #C5A880; color: #171512;">Hover</button></div>
+        <label for="tk-in" style="font-size: 11px; letter-spacing: .2em; color: #BFB3A0;">INPUT · 52 PX · IVORY FIELD</label>
+        <input id="tk-in" class="inp-dark" value="Sana Ahmed">
+      </div>
+
+      <div style="background: #EBE5D9; padding: 28px; display: flex; flex-direction: column; gap: 16px;">
+        <span class="eyebrow" style="color: #7A5F3B;">Buttons on ivory · status pills</span>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;"><button type="button" class="btn-light">Continue</button><button type="button" class="btn-light" style="background: transparent; color: #2C2C2C;">Skip for now</button></div>
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <span style="background: #3F7A5A; color: #FBFAF6; padding: 4px 12px; font-size: 12px; letter-spacing: .14em;">CONFIRMED</span>
+          <span style="background: #B4862B; color: #171512; padding: 4px 12px; font-size: 12px; letter-spacing: .14em;">AWAITING TRANSFER</span>
+          <span style="background: #9E3B3B; color: #FBFAF6; padding: 4px 12px; font-size: 12px; letter-spacing: .14em;">RECEIPT NOT ACCEPTED</span>
+        </div>
+      </div>
+
+      <div style="background: #EBE5D9; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+        <span class="eyebrow" style="color: #7A5F3B;">Calendar day states</span>
+        <div style="display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 6px; text-align: center; font-size: 12px;">
+          <span><span style="display: flex; height: 44px; align-items: center; justify-content: center; font-size: 15px;">9</span>Available</span>
+          <span><span style="display: flex; height: 44px; align-items: center; justify-content: center; font-size: 15px; background: #171512; color: #F3EEE3;">3</span>Selected</span>
+          <span><span style="display: flex; height: 44px; align-items: center; justify-content: center; font-size: 15px; border: 1px solid #171512;">5</span>Departure</span>
+          <span><span style="display: flex; height: 44px; align-items: center; justify-content: center; font-size: 15px; background: #D9D4C7; color: #595959; text-decoration: line-through;">12</span>Reserved</span>
+          <span><span style="display: flex; height: 44px; align-items: center; justify-content: center; font-size: 15px; border: 1px dashed #595959; color: #595959;">27</span>Blocked</span>
+          <span><span style="display: flex; height: 44px; align-items: center; justify-content: center; font-size: 15px; color: #595959; opacity: .55;">1</span>Past</span>
+        </div>
+        <span style="font-size: 13px; color: #595959;">Every state also has a spoken label; colour never carries it alone.</span>
+      </div>
+
+      <div style="background: #171512; color: #F3EEE3; padding: 28px; display: flex; flex-direction: column; gap: 14px;">
+        <span class="eyebrow" style="color: #C5A880;">Upload drop zone · four states</span>
+        <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; font-size: 13px;">
+          <span style="border: 1px dashed #C5A880; padding: 14px;">Idle · drop or choose</span>
+          <span style="border: 1px solid rgba(197,168,128,.6); padding: 14px;">Uploading · 62 percent</span>
+          <span style="border: 1px solid #3F7A5A; padding: 14px;">Done · receipt received</span>
+          <span style="border: 1px solid #9E3B3B; padding: 14px;">Rejected · with reason</span>
+        </div>
+      </div>
+
+      <div style="background: #171512; color: #F3EEE3; padding: 28px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+        <span class="eyebrow" style="color: #C5A880;">Facet light sweep · 1200 ms · off under reduced motion</span>
+        <svg width="320" height="180" viewBox="0 0 320 180" role="img" aria-label="Facet light sweeping across a faceted plane">
+          <defs><clipPath id="tk-gem"><polygon points="20,40 300,40 160,170"></polygon></clipPath></defs>
+          <polygon points="20,40 100,40 160,170" fill="#1E1B17" stroke="#C5A880"></polygon>
+          <polygon points="100,40 160,40 160,170" fill="#25211C" stroke="#C5A880"></polygon>
+          <polygon points="160,40 220,40 160,170" fill="#2A251F" stroke="#C5A880"></polygon>
+          <polygon points="220,40 300,40 160,170" fill="#1C1915" stroke="#C5A880"></polygon>
+          <g clip-path="url(#tk-gem)"><rect class="sweep" x="0" y="0" width="3" height="220" fill="#E2C58F"></rect></g>
+        </svg>
+      </div>
+
+      <div style="background: #EBE5D9; padding: 28px; display: flex; flex-direction: column; gap: 12px;">
+        <span class="eyebrow" style="color: #7A5F3B;">Placeholder treatment</span>
+        <p style="margin: 0;">Check-in <span style="border: 1px dashed currentColor; padding: 0 5px;">[15:00]</span> · IBAN <span style="border: 1px dashed currentColor; padding: 0 5px;">[PK__ MEZN ____]</span></p>
+        <span style="font-size: 13px; color: #595959;">Every unresolved owner value keeps its brackets and a dashed hairline, so it never reads as confirmed fact.</span>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="r-h" style="display: flex; flex-direction: column; gap: 10px;">
+    <h2 id="r-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Rules</h2>
+    <ul style="margin: 0; padding-left: 20px; color: #595959; display: flex; flex-direction: column; gap: 4px;">
+      <li>Radius 0 everywhere. No shadows, no decorative gradients. Depth comes from tinted panels and 1 px hairlines.</li>
+      <li>Gold is line and light, never a fill for large areas. Small gold-toned text on ivory uses Antique Bronze.</li>
+      <li>Midnight and ivory alternate down every page; never a mid-grey ground.</li>
+      <li>Focus: 2 px gold outline, 3 px offset. Touch targets 44 px minimum; inputs 52 px.</li>
+      <li>Motion: 600 to 1200 ms ease-out reveals, the facet sweep and the hairline draw; nothing else moves.</li>
+      <li>Copy: concierge voice, sentence case, full stops. No exclamation marks, emoji, urgency or star ratings.</li>
+    </ul>
+  </section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":2300}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      colors: [
+        { name: 'Midnight', hex: '#171512', use: 'hero, rails' }, { name: 'Midnight 2', hex: '#221F1B', use: 'panels' },
+        { name: 'Ivory', hex: '#F4F1EA', use: 'reading' }, { name: 'Ivory 2', hex: '#EBE5D9', use: 'panels' },
+        { name: 'Taupe', hex: '#D9D4C7', use: 'hairlines' }, { name: 'Paper', hex: '#FBFAF6', use: 'fields' },
+        { name: 'Royal Gold', hex: '#C5A880', use: 'line, mark' }, { name: 'Facet light', hex: '#E2C58F', use: 'sweep only' },
+        { name: 'Antique Bronze', hex: '#7A5F3B', use: 'gold text on ivory' }, { name: 'Ink', hex: '#2C2C2C', use: 'text on ivory' },
+        { name: 'Ink 2', hex: '#595959', use: 'secondary' }, { name: 'On dark', hex: '#F3EEE3', use: 'text on midnight' },
+        { name: 'On dark 2', hex: '#BFB3A0', use: 'secondary' }, { name: 'Confirmed', hex: '#3F7A5A', use: 'with a word' },
+        { name: 'Awaiting', hex: '#B4862B', use: 'with a word' }, { name: 'Problem', hex: '#9E3B3B', use: 'with a word' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

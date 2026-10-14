@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="200" height="200" role="img" aria-label="Crystal Royal Apartment crown-diamond mark, faceted">
+  <title>Crystal Royal Apartment — mark A, faceted</title>
+  <!-- Crown -->
+  <polygon points="56,78 56,44 78,62 100,30 122,62 144,44 144,78" fill="#C5A880"/>
+  <rect x="56" y="78" width="88" height="12" fill="#7A5F3B"/>
+  <!-- Gem: table, crown facets, pavilion -->
+  <g stroke="#7A5F3B" stroke-width="1.5" stroke-linejoin="round">
+    <polygon points="76,100 124,100 136,124 64,124" fill="#D9D4C7"/>
+    <polygon points="60,100 76,100 64,124 44,124" fill="#EBE5D9"/>
+    <polygon points="124,100 140,100 156,124 136,124" fill="#EBE5D9"/>
+    <polygon points="44,124 72,124 100,188" fill="#C5A880"/>
+    <polygon points="72,124 100,124 100,188" fill="#B89C6E"/>
+    <polygon points="100,124 128,124 100,188" fill="#A8905F"/>
+    <polygon points="128,124 156,124 100,188" fill="#93784F"/>
+  </g>
+</svg>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Admin · CRA-2611-0042</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.nav a{display:flex;align-items:center;min-height:44px;padding:0 24px;color:#BFB3A0;text-decoration:none;font-size:14px;letter-spacing:.06em}
+.act{min-height:44px;padding:0 18px;font-family:Jost,sans-serif;font-weight:500;font-size:12px;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;border:1px solid #2C2C2C;background:transparent;color:#2C2C2C}
+.act-primary{background:#3F7A5A;border-color:#3F7A5A;color:#FBFAF6}
+.act-danger{border-color:#9E3B3B;color:#9E3B3B}
+.act:disabled{opacity:.35;cursor:not-allowed}
+.row{display:grid;grid-template-columns:150px 1fr;gap:16px;padding:10px 0;border-bottom:1px solid #D9D4C7;font-size:15px}
+.row dt{color:#595959}.row dd{margin:0}
+.inp{width:100%;min-height:44px;border:1px solid #D9D4C7;background:#FBFAF6;padding:10px 14px;font-family:Jost,sans-serif;font-size:15px}
+button:focus-visible,a:focus-visible,textarea:focus-visible{outline:2px solid #C5A880;outline-offset:2px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.5; color: #2C2C2C; display: flex; flex-wrap: wrap; min-height: 1600px;">
+  <nav class="nav" aria-label="Admin" style="flex: 1 1 240px; max-width: 260px; background: #171512; padding: 28px 0; display: flex; flex-direction: column; gap: 2px;">
+    <span style="padding: 0 24px 24px; color: #F3EEE3; font-size: 12px; letter-spacing: .22em;">CRYSTAL ROYAL · ADMIN</span>
+    <a href="AdminDashboard.dc.html">Dashboard</a>
+    <a href="AdminReservation.dc.html" aria-current="page" style="color: #F3EEE3; border-left: 2px solid #C5A880;">Reservations</a>
+    <a href="AdminCalendar.dc.html">Calendar and blocks</a>
+    <a href="AdminSettings.dc.html">Amenities</a>
+    <a href="AdminSettings.dc.html">Rates</a>
+    <a href="AdminSettings.dc.html">Settings</a>
+  </nav>
+  <main style="flex: 999 1 640px; min-width: 0; padding: 40px 48px; display: flex; flex-direction: column; gap: 28px;">
+    <!-- Filters -->
+    <form aria-label="Find reservations" style="display: flex; flex-wrap: wrap; gap: 12px; align-items: center; padding-bottom: 20px; border-bottom: 1px solid #D9D4C7;">
+      <label for="q" style="position: absolute; left: -9999px;">Search</label><input id="q" class="inp" style="flex: 1 1 280px;" placeholder="Reference, phone or name">
+      <label for="st" style="position: absolute; left: -9999px;">Status</label><select id="st" class="inp" style="flex: 0 1 240px;"><option>All statuses</option><option selected="selected">Payment received</option><option>Reserved</option><option>Confirmed</option><option>Checked in</option><option>Cancelled</option><option>Expired</option></select>
+      <label for="dt" style="position: absolute; left: -9999px;">Arrival from</label><input id="dt" class="inp" type="date" value="2026-10-13" style="flex: 0 1 200px;">
+    </form>
+
+    <div style="display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div><p class="eyebrow num" style="margin: 0; color: #7A5F3B;">CRA-2611-0042 · online</p><h1 class="display" style="font-size: 44px;">Sana Ahmed</h1></div>
+      <span style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: {{pillBg}}; color: {{pillFg}}; font-size: 12px; letter-spacing: .14em; text-transform: uppercase;">{{statusWord}}</span>
+    </div>
+
+    <div style="display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start;">
+      <div style="flex: 1 1 420px; min-width: 0; display: flex; flex-direction: column; gap: 28px;">
+        <section aria-labelledby="g-h">
+          <h2 id="g-h" class="eyebrow" style="margin: 0 0 6px; color: #7A5F3B;">Guest and stay</h2>
+          <dl style="margin: 0;">
+            <div class="row"><dt>Phone</dt><dd class="num">+92 300 0000000 · <a href="#">WhatsApp</a></dd></div>
+            <div class="row"><dt>Email</dt><dd>sana@example.com</dd></div>
+            <div class="row"><dt>Apartment</dt><dd>Three-bedroom with lounge</dd></div>
+            <div class="row"><dt>Dates</dt><dd>Mon 2 – Thu 5 Nov 2026 · 3 nights</dd></div>
+            <div class="row"><dt>Party</dt><dd>2 adults, 4 children</dd></div>
+            <div class="row"><dt>Arrival time</dt><dd>15:00 to 18:00</dd></div>
+            <div class="row"><dt>Requests</dt><dd>A cot for our youngest, please.</dd></div>
+          </dl>
+        </section>
+        <section aria-labelledby="b-h">
+          <h2 id="b-h" class="eyebrow" style="margin: 0 0 6px; color: #7A5F3B;">Breakdown</h2>
+          <table style="border-collapse: collapse; width: 100%; font-size: 15px;">
+            <tbody>
+              <tr><th scope="row" style="text-align: left; font-weight: 400; color: #595959; padding: 8px 0; border-bottom: 1px solid #D9D4C7;">3 nights × 25,000</th><td class="num" style="text-align: right; border-bottom: 1px solid #D9D4C7;">75,000</td></tr>
+              <tr><th scope="row" style="text-align: left; font-weight: 400; color: #595959; padding: 8px 0; border-bottom: 1px solid #D9D4C7;">Additional guests</th><td class="num" style="text-align: right; border-bottom: 1px solid #D9D4C7;">0</td></tr>
+              <tr><th scope="row" style="text-align: left; font-weight: 400; color: #595959; padding: 8px 0; border-bottom: 1px solid #D9D4C7;">Airport transfer × 1</th><td style="text-align: right; border-bottom: 1px solid #D9D4C7; font-size: 13px; color: #595959;">to quote</td></tr>
+              <tr><th scope="row" style="text-align: left; font-weight: 400; color: #595959; padding: 8px 0; border-bottom: 1px solid #D9D4C7;">Tax</th><td style="text-align: right; border-bottom: 1px solid #D9D4C7; font-size: 13px; color: #595959;">rate not set</td></tr>
+              <tr><th scope="row" style="text-align: left; font-weight: 500; padding: 10px 0;">Amount due</th><td class="num" style="text-align: right; font-size: 18px;">PKR 75,000</td></tr>
+            </tbody>
+          </table>
+        </section>
+        <section aria-labelledby="n-h" style="display: flex; flex-direction: column; gap: 8px;">
+          <h2 id="n-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Add a note</h2>
+          <label for="note" style="position: absolute; left: -9999px;">Note</label><textarea id="note" class="inp" style="height: 80px;" placeholder="Visible to admins only"></textarea>
+          <button type="button" class="act" style="align-self: flex-start;">Save note</button>
+        </section>
+      </div>
+
+      <div style="flex: 1 1 380px; min-width: 0; display: flex; flex-direction: column; gap: 24px;">
+        <section aria-labelledby="r-h" style="background: #EBE5D9; padding: 20px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: baseline;"><h2 id="r-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Transfer receipt</h2><span style="font-size: 13px; color: #595959;">Link valid 60 seconds</span></div>
+          <div role="img" aria-label="Receipt image: Meezan Bank transfer, PKR 75,000, remarks CRA-2611-0042" style="height: 300px; background: #FBFAF6; border: 1px solid #D9D4C7; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: #595959; font-size: 13px;"><span>Receipt image</span><span class="num">transfer-receipt.png · uploaded 14:05</span></div>
+          <p style="margin: 0; font-size: 14px; color: #595959;">Guest states PKR 75,000. Check the amount and the reference in the remarks.</p>
+        </section>
+        <section aria-labelledby="a-h" style="display: flex; flex-direction: column; gap: 10px;">
+          <h2 id="a-h" class="eyebrow" style="margin: 0; color: #7A5F3B;">Actions</h2>
+          <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+            <button type="button" class="act act-primary" onClick="{{confirm}}" disabled="{{cantConfirm}}">Confirm stay</button>
+            <button type="button" class="act" onClick="{{reject}}" disabled="{{cantReject}}">Reject receipt</button>
+            <button type="button" class="act" disabled="{{cantCheckIn}}" onClick="{{checkIn}}">Check in</button>
+            <button type="button" class="act act-danger" onClick="{{cancel}}" disabled="{{cantCancel}}">Cancel</button>
+          </div>
+          <sc-if value="{{showReject}}" hint-placeholder-val="{{false}}">
+            <div style="border: 1px solid #9E3B3B; padding: 14px; display: flex; flex-direction: column; gap: 8px;">
+              <label for="why" style="font-size: 13px; font-weight: 500;">Reason shown to the guest</label>
+              <textarea id="why" class="inp" style="height: 64px;">The reference CRA-2611-0042 is missing from the transfer remarks.</textarea>
+              <span style="font-size: 13px; color: #595959;">The reservation returns to Reserved and the hold is extended by 12 hours, once.</span>
+            </div>
+          </sc-if>
+        </section>
+        <section aria-labelledby="l-h">
+          <h2 id="l-h" class="eyebrow" style="margin: 0 0 6px; color: #7A5F3B;">Activity</h2>
+          <ol style="list-style: none; margin: 0; padding: 0; font-size: 14px;">
+            <sc-for list="{{log}}" as="l" hint-placeholder-count="3">
+              <li style="display: grid; grid-template-columns: 110px 1fr; gap: 12px; padding: 8px 0; border-bottom: 1px solid #D9D4C7;"><span class="num" style="color: #595959;">{{l.t}}</span><span>{{l.d}}</span></li>
+            </sc-for>
+          </ol>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1600}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { status: 'payment_submitted', showReject: false, log: [] }; }
+  renderVals() {
+    const s = this.state.status;
+    const add = (status, d) => () => this.setState({ status: status, showReject: false, log: [{ t: 'Now · admin', d: d }].concat(this.state.log) });
+    const words = { payment_submitted: 'Payment received', confirmed: 'Confirmed', reserved: 'Reserved', checked_in: 'Checked in', cancelled: 'Cancelled' };
+    const tone = { payment_submitted: ['#B4862B', '#171512'], reserved: ['#B4862B', '#171512'], confirmed: ['#3F7A5A', '#FBFAF6'], checked_in: ['#3F7A5A', '#FBFAF6'], cancelled: ['#9E3B3B', '#FBFAF6'] }[s];
+    return {
+      statusWord: words[s], pillBg: tone[0], pillFg: tone[1],
+      confirm: add('confirmed', 'Payment verified, stay confirmed. Confirmation email sent.'),
+      reject: () => this.state.showReject ? add('reserved', 'Receipt rejected: reference missing. Hold extended 12 hours.')() : this.setState({ showReject: true }),
+      checkIn: add('checked_in', 'Guest checked in.'),
+      cancel: add('cancelled', 'Cancelled by admin. Cancellation email sent.'),
+      cantConfirm: !(s === 'payment_submitted' || s === 'reserved'),
+      cantReject: s !== 'payment_submitted',
+      cantCheckIn: s !== 'confirmed',
+      cantCancel: !(s === 'payment_submitted' || s === 'reserved' || s === 'confirmed'),
+      showReject: this.state.showReject,
+      log: this.state.log.concat([
+        { t: '13 Oct 14:05', d: 'Receipt uploaded by guest. Owner notified.' },
+        { t: '13 Oct 11:40', d: 'Reserved online. Hold until 23:40. Payment email sent.' }
+      ])
+    };
+  }
+}
+</script>
+</body>
+</html>

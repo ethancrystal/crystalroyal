@@ -1,4 +1,4 @@
-import type { ChildPolicy, DepositPolicy, PricingType } from "./types";
+import type { ChildExtraPolicy, DepositPolicy, PricingType } from "./types";
 
 // One pure pricing function, used for the browser preview and, authoritatively, on the server.
 
@@ -11,7 +11,7 @@ export interface PriceInput {
   maxGuests: number;
   minNights: number;
   extraAdultPerNight: number | null;
-  childPolicy: ChildPolicy;
+  childPolicy: ChildExtraPolicy;
   /** Per-night charge for a child counted as an extra guest when childPolicy = "reduced". */
   childExtraPerNight: number | null;
   taxRatePercent: number | null;
@@ -91,7 +91,7 @@ export function priceStay(input: PriceInput): PriceBreakdown {
   // When the child policy differs, adults take the standard places first and the remaining extra places are children.
   let extraAdults = extraGuests;
   let extraChildren = 0;
-  if (input.childPolicy !== "adult") {
+  if (input.childPolicy !== "same_as_adult") {
     extraAdults = Math.min(extraGuests, Math.max(0, adults - input.standardGuests));
     extraChildren = extraGuests - extraAdults;
   }

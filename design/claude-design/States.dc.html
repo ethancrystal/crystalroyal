@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>States and errors</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.1;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.pill{display:inline-flex;align-self:flex-start;align-items:center;gap:8px;padding:4px 12px;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:#FBFAF6}
+.btn-dark{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 24px;background:#2C2C2C;color:#F4F1EA;text-decoration:none;font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;align-self:flex-start}
+.lbl{display:block;font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.inp{width:100%;height:52px;border:1px solid #D9D4C7;background:#FBFAF6;padding:0 16px;font-family:Jost,sans-serif;font-size:17px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.6; color: #2C2C2C; padding: 64px 48px; display: flex; flex-direction: column; gap: 40px;">
+  <div style="display: flex; flex-direction: column; gap: 8px;">
+    <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Guest-facing states</p>
+    <h1 class="display" style="font-size: 52px;">States and errors</h1>
+    <p style="margin: 0; color: #595959; max-width: 760px;">Every state names what happened and the one thing to do next. Colour always travels with a word.</p>
+  </div>
+  <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(400px, 1fr)); gap: 24px;">
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #9E3B3B;">Unavailable</span>
+      <h2 class="display" style="font-size: 30px;">Those nights have just been reserved</h2>
+      <p style="margin: 0; color: #595959;">Another guest reserved 3 November moments ago. The nearest free stay of the same length is 6 to 9 November.</p>
+      <a href="#" class="btn-dark">See 6 – 9 November</a>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #B4862B; color: #171512;">Party too large</span>
+      <h2 class="display" style="font-size: 30px;">This apartment welcomes up to eight</h2>
+      <p style="margin: 0; color: #595959;">You have nine guests. Six stay as standard; guests seven and eight are PKR 5,000 each per night. For a larger party, write to us and we will suggest an arrangement.</p>
+      <a href="#" class="btn-dark">Ask on WhatsApp</a>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #9E3B3B;">Hold expired</span>
+      <h2 class="display" style="font-size: 30px;">Your hold on these dates has ended</h2>
+      <p style="margin: 0; color: #595959;">We held CRA-2611-0042 for 12 hours and did not receive a transfer, so the nights were released. If you have already paid, send us the receipt and we will restore it.</p>
+      <div style="display: flex; gap: 12px; flex-wrap: wrap;"><a href="#" class="btn-dark">Reserve again</a><a href="#" style="align-self: center;">I have already paid</a></div>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #9E3B3B;">Receipt not accepted</span>
+      <h2 class="display" style="font-size: 30px;">We could not match your receipt</h2>
+      <p style="margin: 0; color: #595959;">Reason from the property: <span style="color: #2C2C2C;">the reference CRA-2611-0042 is missing from the transfer remarks.</span> Your hold is extended to Wed 14 Oct, 11:40.</p>
+      <a href="#" class="btn-dark">Upload a new receipt</a>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #9E3B3B;">Check your details</span>
+      <h2 class="display" style="font-size: 30px;">Form validation</h2>
+      <div role="alert" style="border-left: 0; border-top: 1px solid #9E3B3B; padding-top: 10px; font-size: 15px;">Two details need attention before you continue.</div>
+      <div><label class="lbl" for="e1">Email</label><input class="inp" id="e1" value="sana@example" aria-invalid="true" aria-describedby="e1m" style="border-color: #9E3B3B;"><p id="e1m" style="margin: 6px 0 0; font-size: 14px; color: #9E3B3B;">Enter a full email address, such as name@example.com.</p></div>
+      <div><label class="lbl" for="e2">Phone or WhatsApp</label><input class="inp" id="e2" value="" aria-invalid="true" aria-describedby="e2m" style="border-color: #9E3B3B;"><p id="e2m" style="margin: 6px 0 0; font-size: 14px; color: #9E3B3B;">We need a number to reach you on arrival.</p></div>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #595959;">No free nights</span>
+      <h2 class="display" style="font-size: 30px;">December is fully reserved</h2>
+      <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 2px;">
+        <sc-for list="{{cells}}" as="c"><span style="height: 26px; background: #D9D4C7;"></span></sc-for>
+      </div>
+      <p style="margin: 0; color: #595959;">The next free nights begin on Saturday 9 January 2027.</p>
+      <a href="#" class="btn-dark">Go to January</a>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #B4862B; color: #171512;">Price changed</span>
+      <h2 class="display" style="font-size: 30px;">The amount was recalculated</h2>
+      <p style="margin: 0; color: #595959;">A new rate took effect for your dates. Please review the updated total before you reserve.</p>
+      <p class="num" style="margin: 0;"><span style="text-decoration: line-through; color: #595959;">PKR 75,000</span> → PKR 78,000</p>
+      <a href="#" class="btn-dark">Review and continue</a>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #595959;">Two-bedroom</span>
+      <h2 class="display" style="font-size: 30px;">Reserved directly with the property</h2>
+      <p style="margin: 0; color: #595959;">Occupancy and availability for the two-bedroom apartment are confirmed directly with the property. Write to us with your dates and party.</p>
+      <a href="#" class="btn-dark">Ask on WhatsApp</a>
+    </section>
+
+    <section style="background: #EBE5D9; padding: 32px; display: flex; flex-direction: column; gap: 14px;">
+      <span class="pill" style="background: #9E3B3B;">Link not valid</span>
+      <h2 class="display" style="font-size: 30px;">We cannot open this reservation</h2>
+      <p style="margin: 0; color: #595959;">The link may be incomplete. Use the link in your email, or send us your reference and we will resend it.</p>
+      <a href="#" class="btn-dark">WhatsApp us</a>
+    </section>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1700}}'>
+class Component extends DCLogic {
+  renderVals() { return { cells: Array.from({ length: 35 }, (_, i) => ({ i: i })) }; }
+}
+</script>
+</body>
+</html>

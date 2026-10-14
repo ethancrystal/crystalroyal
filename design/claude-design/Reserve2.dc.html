@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reserve · step 2 of 4 · At your service</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.ph{border:1px dashed currentColor;padding:0 5px;opacity:.85}
+.btn-dark{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 32px;background:#2C2C2C;color:#F4F1EA;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.btn-ghost{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border:1px solid #2C2C2C;color:#2C2C2C;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.qty{width:40px;height:40px;border:1px solid #2C2C2C;background:transparent;font-size:18px;cursor:pointer;font-family:Jost,sans-serif}
+.qty:disabled{opacity:.3;cursor:not-allowed}
+a:focus-visible,button:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 17px; line-height: 1.6; color: #2C2C2C;">
+  <header style="background: #171512; color: #F3EEE3; border-bottom: 1px solid rgba(197,168,128,.35);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 48px; height: 76px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <a href="Main.dc.html" style="color: #F3EEE3; text-decoration: none; font-size: 13px; letter-spacing: .22em;">CRYSTAL ROYAL APARTMENT</a>
+      <ol aria-label="Reservation steps" style="list-style: none; margin: 0 0 0 auto; padding: 0; display: flex; gap: 28px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;">
+        <li style="color: #BFB3A0;"><a href="Reserve1.dc.html" style="color: #BFB3A0; text-decoration: none;">1 Dates and guests</a></li>
+        <li aria-current="step" style="color: #F3EEE3; border-bottom: 1px solid #C5A880; padding-bottom: 4px;">2 At your service</li>
+        <li style="color: #BFB3A0;">3 Your details</li>
+        <li style="color: #BFB3A0;">4 Review</li>
+      </ol>
+    </div>
+  </header>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 56px 48px 120px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 36px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Step 2 of 4 · optional</p>
+        <h1 class="display" style="font-size: 56px;">At your service</h1>
+        <p style="margin: 0; color: #595959; max-width: 620px;">Add anything you would like arranged before you arrive. Where a price is still to be confirmed, we note your request and quote it separately; it is not added to your total.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px;">
+        <sc-for list="{{items}}" as="a" hint-placeholder-count="8">
+          <div style="background: #EBE5D9; padding: 24px; display: flex; flex-direction: column; gap: 12px; border: 1px solid {{a.border}};">
+            <div style="display: flex; justify-content: space-between; gap: 12px; align-items: baseline;">
+              <h2 style="margin: 0; font-size: 18px; font-weight: 500;">{{a.name}}</h2>
+              <span style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #7A5F3B; white-space: nowrap;">{{a.unit}}</span>
+            </div>
+            <p style="margin: 0; font-size: 15px; color: #595959;">{{a.desc}}</p>
+            <div style="display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-top: auto;">
+              <span style="font-size: 14px; color: #595959;"><span class="ph">[PKR __]</span> · to be confirmed</span>
+              <span style="display: flex; align-items: center; gap: 10px;">
+                <button type="button" class="qty" aria-label="{{a.decLabel}}" onClick="{{a.dec}}" disabled="{{a.decDisabled}}">−</button>
+                <span class="num" style="width: 18px; text-align: center;">{{a.qty}}</span>
+                <button type="button" class="qty" aria-label="{{a.incLabel}}" onClick="{{a.inc}}" disabled="{{a.incDisabled}}">+</button>
+              </span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
+        <a href="Reserve3.dc.html" class="btn-dark">Continue</a>
+        <a href="Reserve3.dc.html" class="btn-ghost">Skip for now</a>
+      </div>
+    </main>
+
+    <aside aria-label="Your stay" style="flex: 1 1 360px; position: sticky; top: 24px; background: #171512; color: #F3EEE3; padding: 32px; display: flex; flex-direction: column; gap: 18px;">
+      <p class="eyebrow" style="margin: 0; color: #C5A880;">Your stay</p>
+      <p class="display" style="font-size: 28px; font-weight: 400;">Three-Bedroom Apartment with Lounge</p>
+      <p class="num" style="margin: 0; font-size: 15px; color: #BFB3A0;">2 – 5 November 2026 · 3 nights · 6 guests</p>
+      <dl style="margin: 0; display: grid; grid-template-columns: 1fr auto; gap: 10px 16px; font-size: 15px; border-top: 1px solid rgba(197,168,128,.35); padding-top: 16px;">
+        <dt style="color: #BFB3A0;">3 nights × PKR 25,000</dt><dd class="num" style="margin: 0; text-align: right;">75,000</dd>
+        <sc-for list="{{chosen}}" as="c"><dt style="color: #BFB3A0;">{{c.label}}</dt><dd style="margin: 0; text-align: right; font-size: 13px; color: #BFB3A0;">quoted separately</dd></sc-for>
+        <dt style="color: #BFB3A0;">Taxes</dt><dd style="margin: 0; text-align: right; font-size: 13px; color: #BFB3A0;">plus applicable taxes</dd>
+      </dl>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #C5A880; padding-top: 16px;">
+        <span>Total before tax</span><span class="num" style="font-family: 'Cormorant Garamond', serif; font-size: 40px; color: #C5A880;">75,000</span>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: #BFB3A0;">PKR. Amenity prices are confirmed by the property.</p>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1400}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { q: { 'airport-transfer': 1 } }; }
+  renderVals() {
+    const defs = [
+      ['airport-transfer', 'Airport transfer', 'per trip', 'A driver meets you at Jinnah International.', 4],
+      ['breakfast', 'Breakfast for the party', 'per guest per night', 'Breakfast prepared in the apartment each morning.', 1],
+      ['housekeeping-daily', 'Daily housekeeping', 'per night', 'Rooms refreshed every day of your stay.', 1],
+      ['early-check-in', 'Early check-in', 'per stay', 'Your apartment ready before the standard hour.', 1],
+      ['late-check-out', 'Late check-out', 'per stay', 'Keep the apartment into the afternoon.', 1],
+      ['extra-bedding', 'Extra bedding or cot', 'per night', 'An additional bed, or a cot for an infant.', 2],
+      ['grocery-prestock', 'Kitchen pre-stocked', 'per stay', 'Essentials in the kitchen before you arrive.', 1],
+      ['driver-on-call', 'Driver on call', 'per day', 'A car and driver for the day.', 10]
+    ];
+    const q = this.state.q;
+    const setQ = (k, v) => () => this.setState({ q: Object.assign({}, q, { [k]: v }) });
+    const items = defs.map(([slug, name, unit, desc, max]) => {
+      const n = q[slug] || 0;
+      return { name: name, unit: unit, desc: desc, qty: n, border: n > 0 ? '#7A5F3B' : 'transparent',
+        dec: setQ(slug, n - 1), inc: setQ(slug, n + 1), decDisabled: n <= 0, incDisabled: n >= max,
+        decLabel: 'Remove one ' + name.toLowerCase(), incLabel: 'Add ' + name.toLowerCase() };
+    });
+    const chosen = items.filter((i) => i.qty > 0).map((i) => ({ label: i.name + (i.qty > 1 ? ' × ' + i.qty : '') }));
+    return { items: items, chosen: chosen };
+  }
+}
+</script>
+</body>
+</html>

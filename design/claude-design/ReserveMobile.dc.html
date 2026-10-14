@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reserve · step 1 · mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.step{width:48px;height:48px;border:1px solid #2C2C2C;background:transparent;font-size:20px;cursor:pointer;font-family:Jost,sans-serif}
+.step:disabled{opacity:.3;cursor:not-allowed}
+.day{height:44px;display:flex;align-items:center;justify-content:center;font-size:15px;font-variant-numeric:tabular-nums}
+.btn-gold{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;background:#C5A880;color:#171512;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+a:focus-visible,button:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 16px; line-height: 1.6; color: #2C2C2C; min-height: 2300px; display: flex; flex-direction: column;">
+  <header style="background: #171512; color: #F3EEE3; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px;">
+    <div style="display: flex; align-items: center; justify-content: space-between;">
+      <a href="ApartmentMobile.dc.html" aria-label="Back" style="width: 44px; height: 44px; border: 1px solid rgba(197,168,128,.5); color: #F3EEE3; display: flex; align-items: center; justify-content: center; text-decoration: none;">‹</a>
+      <span class="eyebrow" style="font-size: 11px; color: #BFB3A0;">Step 1 of 4</span>
+    </div>
+    <div aria-hidden="true" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;"><span style="height: 2px; background: #C5A880;"></span><span style="height: 2px; background: rgba(197,168,128,.25);"></span><span style="height: 2px; background: rgba(197,168,128,.25);"></span><span style="height: 2px; background: rgba(197,168,128,.25);"></span></div>
+  </header>
+
+  <main style="padding: 32px 16px; display: flex; flex-direction: column; gap: 32px; flex: 1;">
+    <div style="display: flex; flex-direction: column; gap: 8px;">
+      <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Three-bedroom with lounge</p>
+      <h1 class="display" style="font-size: 38px;">Dates and guests</h1>
+    </div>
+
+    <section aria-labelledby="mdates" style="display: flex; flex-direction: column; gap: 12px;">
+      <h2 id="mdates" class="eyebrow" style="margin: 0; color: #7A5F3B;">Your dates</h2>
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); border: 1px solid #2C2C2C;">
+        <div style="padding: 10px 14px; border-right: 1px solid #2C2C2C;"><span style="font-size: 11px; letter-spacing: .16em; color: #595959;">ARRIVAL</span><br>Mon 2 Nov</div>
+        <div style="padding: 10px 14px;"><span style="font-size: 11px; letter-spacing: .16em; color: #595959;">DEPARTURE</span><br>Thu 5 Nov</div>
+      </div>
+      <div style="background: #EBE5D9; padding: 14px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;"><button type="button" aria-label="Previous month" style="width: 44px; height: 44px; border: 0; background: transparent; font-size: 20px;">‹</button><span style="font-weight: 500;">November 2026</span><button type="button" aria-label="Next month" style="width: 44px; height: 44px; border: 0; background: transparent; font-size: 20px;">›</button></div>
+        <div role="grid" aria-label="November 2026" style="display: grid; grid-template-columns: repeat(7, minmax(0, 1fr));">
+          <sc-for list="{{wd}}" as="w"><div class="day" style="height: 26px; font-size: 10px; letter-spacing: .12em; color: #595959;">{{w}}</div></sc-for>
+          <sc-for list="{{days}}" as="d"><div class="day" role="gridcell" aria-label="{{d.aria}}" style="height: 44px; {{d.style}}">{{d.n}}</div></sc-for>
+        </div>
+      </div>
+      <p class="num" style="margin: 0; font-size: 14px;">3 nights</p>
+    </section>
+
+    <section aria-labelledby="mparty" style="display: flex; flex-direction: column;">
+      <h2 id="mparty" class="eyebrow" style="margin: 0 0 4px; color: #7A5F3B;">Your party</h2>
+      <sc-for list="{{steppers}}" as="s" hint-placeholder-count="2">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 0; border-bottom: 1px solid #D9D4C7;">
+          <span><span style="font-weight: 500;">{{s.label}}</span><br><span style="font-size: 13px; color: #595959;">{{s.hint}}</span></span>
+          <span style="display: flex; align-items: center; gap: 14px;">
+            <button type="button" class="step" aria-label="{{s.decLabel}}" onClick="{{s.dec}}" disabled="{{s.decDisabled}}">−</button>
+            <span class="num" aria-live="polite" style="width: 18px; text-align: center; font-size: 18px;">{{s.value}}</span>
+            <button type="button" class="step" aria-label="{{s.incLabel}}" onClick="{{s.inc}}" disabled="{{s.incDisabled}}">+</button>
+          </span>
+        </div>
+      </sc-for>
+      <p role="status" style="margin: 12px 0 0; font-size: 14px; color: #595959;">{{partyNote}}</p>
+    </section>
+  </main>
+
+  <!-- Summary bar, fixed to the bottom of the viewport on a phone -->
+  <div style="position: sticky; bottom: 0; background: #171512; color: #F3EEE3; padding: 14px 16px 18px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid #C5A880;">
+    <sc-if value="{{hasExtra}}" hint-placeholder-val="{{false}}"><div style="display: flex; justify-content: space-between; font-size: 13px; color: #BFB3A0;"><span>{{extraLabel}}</span><span class="num">{{extraAmount}}</span></div></sc-if>
+    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+      <span style="font-size: 14px; color: #BFB3A0;">3 nights · {{guests}} guests<br>before tax</span>
+      <span class="num" style="font-family: 'Cormorant Garamond', serif; font-size: 34px; color: #C5A880;">PKR {{total}}</span>
+    </div>
+    <a href="Reserve2.dc.html" class="btn-gold">Continue</a>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":2300}}'>
+class Component extends DCLogic {
+  constructor(props) { super(props); this.state = { adults: 4, children: 3 }; }
+  renderVals() {
+    const { adults, children } = this.state;
+    const guests = adults + children;
+    const extra = Math.max(0, guests - 6);
+    const set = (k, v) => () => this.setState({ [k]: v });
+    const marks = { 2: 'sel', 3: 'sel', 4: 'sel', 5: 'end', 12: 'booked', 13: 'booked', 14: 'booked', 20: 'booked', 21: 'booked', 27: 'blocked', 28: 'blocked' };
+    const days = [];
+    for (let i = 0; i < 6; i++) days.push({ n: '', aria: '', style: '' });
+    for (let d = 1; d <= 30; d++) {
+      const m = marks[d];
+      let style = '';
+      let aria = 'November ' + d + ', available';
+      if (m === 'sel') { style = 'background:#171512;color:#F3EEE3;'; aria = 'November ' + d + ', in your stay'; }
+      if (m === 'end') { style = 'border:1px solid #171512;'; aria = 'November ' + d + ', departure'; }
+      if (m === 'booked') { style = 'background:#D9D4C7;color:#595959;text-decoration:line-through;'; aria = 'November ' + d + ', reserved'; }
+      if (m === 'blocked') { style = 'border:1px dashed #595959;color:#595959;'; aria = 'November ' + d + ', unavailable'; }
+      days.push({ n: String(d), aria: aria, style: style });
+    }
+    return {
+      wd: ['MO', 'TU', 'WE', 'TH', 'FR', 'SA', 'SU'], days: days,
+      steppers: [
+        { label: 'Adults', hint: 'Age 12 and over', value: adults, dec: set('adults', adults - 1), inc: set('adults', adults + 1), decDisabled: adults <= 1, incDisabled: guests >= 8, decLabel: 'Fewer adults', incLabel: 'More adults' },
+        { label: 'Children', hint: 'Counted in the party', value: children, dec: set('children', children - 1), inc: set('children', children + 1), decDisabled: children <= 0, incDisabled: guests >= 8, decLabel: 'Fewer children', incLabel: 'More children' }
+      ],
+      guests: guests,
+      partyNote: guests >= 8 ? 'Eight is the maximum for this apartment.' : (extra > 0 ? 'Guests beyond six are PKR 5,000 each per night.' : 'Within the standard six.'),
+      hasExtra: extra > 0,
+      extraLabel: extra + ' additional guest' + (extra > 1 ? 's' : '') + ' × 5,000 × 3 nights',
+      extraAmount: (extra * 15000).toLocaleString('en-US'),
+      total: (75000 + extra * 15000).toLocaleString('en-US')
+    };
+  }
+}
+</script>
+</body>
+</html>

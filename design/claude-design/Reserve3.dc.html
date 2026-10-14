@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Reserve · step 3 of 4 · Your details</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#F4F1EA}
+*{box-sizing:border-box}
+a{color:#7A5F3B}
+.eyebrow{font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-weight:500;font-variant-numeric:tabular-nums}
+.ph{border:1px dashed currentColor;padding:0 5px;opacity:.85}
+.btn-dark{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 32px;background:#2C2C2C;color:#F4F1EA;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.lbl{display:block;font-weight:500;font-size:12px;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px}
+.inp{width:100%;height:52px;border:1px solid #D9D4C7;background:#FBFAF6;padding:0 16px;font-family:Jost,sans-serif;font-size:17px;color:#2C2C2C}
+.inp:focus{outline:2px solid #C5A880;outline-offset:0;border-color:#7A5F3B}
+.help{margin:6px 0 0;font-size:13px;color:#595959}
+a:focus-visible,button:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 17px; line-height: 1.6; color: #2C2C2C;">
+  <header style="background: #171512; color: #F3EEE3; border-bottom: 1px solid rgba(197,168,128,.35);">
+    <div style="max-width: 1280px; margin: 0 auto; padding: 0 48px; height: 76px; display: flex; align-items: center; gap: 24px; flex-wrap: wrap;">
+      <a href="Main.dc.html" style="color: #F3EEE3; text-decoration: none; font-size: 13px; letter-spacing: .22em;">CRYSTAL ROYAL APARTMENT</a>
+      <ol aria-label="Reservation steps" style="list-style: none; margin: 0 0 0 auto; padding: 0; display: flex; gap: 28px; font-size: 12px; letter-spacing: .16em; text-transform: uppercase;">
+        <li><a href="Reserve1.dc.html" style="color: #BFB3A0; text-decoration: none;">1 Dates and guests</a></li>
+        <li><a href="Reserve2.dc.html" style="color: #BFB3A0; text-decoration: none;">2 At your service</a></li>
+        <li aria-current="step" style="color: #F3EEE3; border-bottom: 1px solid #C5A880; padding-bottom: 4px;">3 Your details</li>
+        <li style="color: #BFB3A0;">4 Review</li>
+      </ol>
+    </div>
+  </header>
+
+  <div style="max-width: 1280px; margin: 0 auto; padding: 56px 48px 120px; display: flex; flex-wrap: wrap; gap: 56px; align-items: flex-start;">
+    <main style="flex: 999 1 560px; min-width: 0; display: flex; flex-direction: column; gap: 32px;">
+      <div style="display: flex; flex-direction: column; gap: 12px;">
+        <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Step 3 of 4</p>
+        <h1 class="display" style="font-size: 56px;">Your details</h1>
+        <p style="margin: 0; color: #595959;">So we can send your payment instructions and greet you on arrival.</p>
+      </div>
+      <form style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 24px; max-width: 760px;">
+        <div style="grid-column: 1 / 3;"><label class="lbl" for="name">Full name</label><input class="inp" id="name" value="Sana Ahmed" autocomplete="name"></div>
+        <div><label class="lbl" for="phone">Phone or WhatsApp</label><input class="inp" id="phone" value="+92 300 0000000" autocomplete="tel" inputmode="tel"><p class="help">We send updates here.</p></div>
+        <div><label class="lbl" for="email">Email</label><input class="inp" id="email" value="sana@example.com" autocomplete="email" type="email"><p class="help">Your reservation link arrives by email.</p></div>
+        <div><label class="lbl" for="arrival">Expected arrival time</label><select class="inp" id="arrival"><option>Afternoon, 15:00 to 18:00</option><option>Evening, after 18:00</option><option>Late night, after 22:00</option><option>Not sure yet</option></select></div>
+        <div><label class="lbl" for="idtype">Identity on arrival</label><div class="inp" id="idtype" style="display: flex; align-items: center; background: transparent; border-style: dashed; font-size: 15px; color: #595959;">CNIC or passport for each adult</div></div>
+        <div style="grid-column: 1 / 3;"><label class="lbl" for="req">Special requests <span style="font-weight: 400; text-transform: none; letter-spacing: 0; color: #595959;">(optional)</span></label><textarea class="inp" id="req" style="height: 120px; padding: 14px 16px; resize: vertical;">A cot for our youngest, please.</textarea></div>
+        <label style="grid-column: 1 / 3; display: flex; gap: 14px; align-items: flex-start; font-size: 15px; cursor: pointer;">
+          <input type="checkbox" checked="checked" style="width: 22px; height: 22px; margin-top: 2px; accent-color: #2C2C2C;">
+          <span>I have read the <a href="#">house rules</a> and agree to them on behalf of my party.</span>
+        </label>
+        <p style="grid-column: 1 / 3; margin: 0; font-size: 13px; color: #595959; border-top: 1px solid #D9D4C7; padding-top: 16px;">We use these details only to manage your stay and keep them no longer than needed. See our <a href="#">privacy notice</a>.</p>
+      </form>
+      <div style="display: flex; gap: 16px; align-items: center;">
+        <a href="Reserve4.dc.html" class="btn-dark">Continue to review</a>
+        <a href="Reserve2.dc.html" style="font-size: 15px;">Back</a>
+      </div>
+    </main>
+
+    <aside aria-label="Your stay" style="flex: 1 1 360px; position: sticky; top: 24px; background: #171512; color: #F3EEE3; padding: 32px; display: flex; flex-direction: column; gap: 18px;">
+      <p class="eyebrow" style="margin: 0; color: #C5A880;">Your stay</p>
+      <p class="display" style="font-size: 28px; font-weight: 400;">Three-Bedroom Apartment with Lounge</p>
+      <p class="num" style="margin: 0; font-size: 15px; color: #BFB3A0;">2 – 5 November 2026 · 3 nights · 2 adults, 4 children</p>
+      <table style="border-collapse: collapse; width: 100%; font-size: 15px;">
+        <tbody>
+          <tr><th scope="row" style="text-align: left; font-weight: 400; color: #BFB3A0; padding: 8px 0; border-top: 1px solid rgba(197,168,128,.35);">3 nights × PKR 25,000</th><td class="num" style="text-align: right; border-top: 1px solid rgba(197,168,128,.35);">75,000</td></tr>
+          <tr><th scope="row" style="text-align: left; font-weight: 400; color: #BFB3A0; padding: 8px 0;">Additional guests</th><td class="num" style="text-align: right;">0</td></tr>
+          <tr><th scope="row" style="text-align: left; font-weight: 400; color: #BFB3A0; padding: 8px 0;">Airport transfer × 1</th><td style="text-align: right; font-size: 13px; color: #BFB3A0;">quoted separately</td></tr>
+          <tr><th scope="row" style="text-align: left; font-weight: 400; color: #BFB3A0; padding: 8px 0;"><span class="ph">[Applicable taxes]</span> at <span class="ph">[__]</span>%</th><td style="text-align: right; font-size: 13px; color: #BFB3A0;">plus applicable taxes</td></tr>
+        </tbody>
+      </table>
+      <div style="display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid #C5A880; padding-top: 16px;">
+        <span>Total before tax</span><span class="num" style="font-family: 'Cormorant Garamond', serif; font-size: 40px; color: #C5A880;">75,000</span>
+      </div>
+      <div style="display: flex; justify-content: space-between; font-size: 15px;"><span style="color: #BFB3A0;">Due to confirm · <span class="ph">[full]</span> payment</span><span class="num">PKR 75,000</span></div>
+      <p style="margin: 0; font-size: 13px; color: #BFB3A0;">If the property moves to a 50% deposit, the deposit shows here and the balance is settled at check-in.</p>
+    </aside>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":1500}}'>
+class Component extends DCLogic {
+  renderVals() { return {}; }
+}
+</script>
+</body>
+</html>

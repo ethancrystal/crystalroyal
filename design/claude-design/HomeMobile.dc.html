@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Home · mobile</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;family=Jost:wght@400;500&amp;display=swap">
+<style>
+body{margin:0;background:#171512}
+*{box-sizing:border-box}
+a{color:#C5A880}a:hover{color:#E2C58F}
+.eyebrow{font-family:Jost,sans-serif;font-weight:500;font-size:12px;letter-spacing:.2em;text-transform:uppercase}
+.display{font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;line-height:1.05;margin:0}
+.num{font-family:Jost,sans-serif;font-weight:500;font-variant-numeric:tabular-nums}
+.ph{border:1px dashed currentColor;padding:0 5px;opacity:.85}
+.btn-gold{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 24px;background:#C5A880;color:#171512;text-decoration:none;font-family:Jost,sans-serif;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.btn-light{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;background:#2C2C2C;color:#F4F1EA;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.btn-ghost-light{display:flex;align-items:center;justify-content:center;min-height:52px;padding:0 20px;color:#2C2C2C;border:1px solid #2C2C2C;text-decoration:none;font-weight:500;font-size:13px;letter-spacing:.16em;text-transform:uppercase}
+.field{display:flex;flex-direction:column;gap:6px;padding:14px 16px;border-bottom:1px solid rgba(197,168,128,.35)}
+.field label{font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#BFB3A0}
+.field input,.field select{height:28px;background:transparent;border:0;color:#F3EEE3;font-family:Jost,sans-serif;font-size:17px;padding:0;color-scheme:dark;width:100%}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid #C5A880;outline-offset:3px}
+</style>
+</helmet>
+<div style="font-family: Jost, 'Trebuchet MS', sans-serif; font-size: 17px; line-height: 1.6; color: #F3EEE3; background: #171512;">
+  <header style="height: 64px; padding: 0 16px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(197,168,128,.35);">
+    <a href="Main.dc.html" style="display: flex; align-items: center; gap: 10px; color: #F3EEE3; text-decoration: none;" aria-label="Crystal Royal Apartment, home">
+      <svg width="30" height="30" viewBox="0 0 200 200" aria-hidden="true"><polygon points="56,78 56,44 78,62 100,30 122,62 144,44 144,78" fill="#C5A880"></polygon><rect x="56" y="78" width="88" height="12" fill="#7A5F3B"></rect><polygon points="76,100 124,100 136,124 64,124" fill="#D9D4C7" stroke="#7A5F3B" stroke-width="1.5"></polygon><polygon points="60,100 76,100 64,124 44,124" fill="#EBE5D9" stroke="#7A5F3B" stroke-width="1.5"></polygon><polygon points="124,100 140,100 156,124 136,124" fill="#EBE5D9" stroke="#7A5F3B" stroke-width="1.5"></polygon><polygon points="44,124 72,124 100,188" fill="#C5A880" stroke="#7A5F3B" stroke-width="1.5"></polygon><polygon points="72,124 100,124 100,188" fill="#B89C6E" stroke="#7A5F3B" stroke-width="1.5"></polygon><polygon points="100,124 128,124 100,188" fill="#A8905F" stroke="#7A5F3B" stroke-width="1.5"></polygon><polygon points="128,124 156,124 100,188" fill="#93784F" stroke="#7A5F3B" stroke-width="1.5"></polygon></svg>
+      <span style="font-size: 11px; letter-spacing: .2em;">CRYSTAL ROYAL APARTMENT</span>
+    </a>
+    <button type="button" aria-label="Open menu" style="width: 44px; height: 44px; background: transparent; border: 1px solid rgba(197,168,128,.5); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; cursor: pointer;"><span style="width: 18px; height: 1px; background: #F3EEE3;"></span><span style="width: 18px; height: 1px; background: #F3EEE3;"></span></button>
+  </header>
+
+  <section style="padding: 56px 16px 48px; display: flex; flex-direction: column; gap: 22px;">
+    <p class="eyebrow" style="margin: 0; color: #C5A880;">Serviced apartments · Karachi</p>
+    <h1 class="display" style="font-size: 50px;">A royal address for <em style="font-style: italic;">unhurried</em> stays.</h1>
+    <div style="width: 80px; height: 1px; background: #C5A880;"></div>
+    <p style="margin: 0; color: #BFB3A0; font-size: 16px;">Two fully serviced apartments with lounges in <span class="ph">[Neighbourhood]</span>, for families and small parties who would rather settle in than check in.</p>
+    <form aria-label="Check availability" style="margin-top: 12px; background: #221F1B; border: 1px solid rgba(197,168,128,.5); display: flex; flex-direction: column;">
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));">
+        <div class="field" style="border-right: 1px solid rgba(197,168,128,.35);"><label for="m-arr">Arrival</label><input id="m-arr" type="date" value="2026-11-02"></div>
+        <div class="field"><label for="m-dep">Departure</label><input id="m-dep" type="date" value="2026-11-05"></div>
+        <div class="field" style="border-right: 1px solid rgba(197,168,128,.35);"><label for="m-ad">Adults</label><select id="m-ad"><option>1</option><option selected="selected">2</option><option>3</option><option>4</option></select></div>
+        <div class="field"><label for="m-ch">Children</label><select id="m-ch"><option>0</option><option>1</option><option>2</option><option>3</option><option selected="selected">4</option></select></div>
+      </div>
+      <a href="ReserveMobile.dc.html" class="btn-gold">Check availability</a>
+    </form>
+    <p style="margin: 0; font-size: 13px; color: #BFB3A0;">From PKR 17,000 per night, plus applicable taxes. Rates as of October 2026, subject to change.</p>
+  </section>
+
+  <section style="background: #F4F1EA; color: #2C2C2C; padding: 64px 16px; display: flex; flex-direction: column; gap: 32px;">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <p class="eyebrow" style="margin: 0; color: #7A5F3B;">The apartments</p>
+      <h2 class="display" style="font-size: 40px;">Two ways to stay</h2>
+    </div>
+    <sc-for list="{{apts}}" as="a" hint-placeholder-count="2">
+      <article style="background: #EBE5D9;">
+        <div style="aspect-ratio: 4 / 3; background: #221F1B; color: #BFB3A0; display: flex; align-items: center; justify-content: center; padding: 16px; text-align: center; font-size: 12px; letter-spacing: .06em;">{{a.photo}}</div>
+        <div style="padding: 24px 20px; display: flex; flex-direction: column; gap: 14px;">
+          <p class="eyebrow" style="margin: 0; color: #7A5F3B;">{{a.eyebrow}}</p>
+          <h3 class="display" style="font-size: 30px;">{{a.name}}</h3>
+          <p style="margin: 0;"><span class="num" style="font-size: 22px;">{{a.rate}}</span> <span style="color: #595959; font-size: 14px;">per night, plus applicable taxes</span></p>
+          <p style="margin: 0; color: #595959; font-size: 15px;">{{a.occ}}</p>
+          <div style="display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+            <a href="{{a.reserveHref}}" class="btn-light">{{a.cta}}</a>
+            <a href="ApartmentMobile.dc.html" class="btn-ghost-light">See it</a>
+          </div>
+        </div>
+      </article>
+    </sc-for>
+  </section>
+
+  <section style="background: #EBE5D9; color: #2C2C2C; padding: 64px 16px; display: flex; flex-direction: column; gap: 24px;">
+    <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Add to your stay</p>
+    <h2 class="display" style="font-size: 40px;">At your service</h2>
+    <ul style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #D9D4C7;">
+      <sc-for list="{{amenities}}" as="m" hint-placeholder-count="8">
+        <li style="padding: 16px 0; border-bottom: 1px solid #D9D4C7; display: flex; justify-content: space-between; gap: 12px; font-size: 16px;"><span>{{m.name}}</span><span style="color: #7A5F3B; font-size: 13px; text-align: right;"><span class="ph">[PKR __]</span><br>{{m.unit}}</span></li>
+      </sc-for>
+    </ul>
+  </section>
+
+  <section style="background: #F4F1EA; color: #2C2C2C; padding: 64px 16px; display: flex; flex-direction: column; gap: 28px;">
+    <h2 class="display" style="font-size: 40px;">How reserving works</h2>
+    <ol style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 24px;">
+      <sc-for list="{{steps}}" as="s" hint-placeholder-count="4">
+        <li style="display: flex; gap: 18px; border-top: 1px solid #7A5F3B; padding-top: 16px;"><span class="display" style="font-size: 34px; color: #7A5F3B; width: 40px;">{{s.n}}</span><span><strong style="font-weight: 500;">{{s.title}}</strong><br><span style="color: #595959; font-size: 15px;">{{s.body}}</span></span></li>
+      </sc-for>
+    </ol>
+  </section>
+
+  <section style="background: #EBE5D9; color: #2C2C2C; padding: 64px 16px; display: flex; flex-direction: column; gap: 18px;">
+    <p class="eyebrow" style="margin: 0; color: #7A5F3B;">Location</p>
+    <h2 class="display" style="font-size: 36px;"><span class="ph">[Neighbourhood]</span>, Karachi</h2>
+    <p style="margin: 0; color: #595959;"><span class="ph">[Street address]</span></p>
+    <div style="aspect-ratio: 4 / 3; background: #221F1B; color: #BFB3A0; display: flex; align-items: center; justify-content: center; font-size: 12px;">Map · static, no tracking</div>
+    <p style="margin: 0; font-size: 15px;">Check-in <span class="ph num">[15:00]</span> · Check-out <span class="ph num">[11:00]</span></p>
+  </section>
+
+  <section style="padding: 64px 16px; display: flex; flex-direction: column; gap: 28px;">
+    <h2 class="eyebrow" style="margin: 0; color: #C5A880;">Occupancy and nightly rates</h2>
+    <div style="border-top: 1px solid #C5A880; padding-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+      <p class="display" style="font-size: 25px; font-weight: 400;">Three-Bedroom Apartment with Lounge — PKR 25,000 per night, plus applicable taxes</p>
+      <p style="margin: 0; color: #BFB3A0; font-size: 16px;">Accommodates up to 6 guests as standard, with a maximum capacity of 8 guests. Each additional adult (guests 7 and 8) is charged PKR 5,000 per night, plus applicable taxes.</p>
+    </div>
+    <div style="border-top: 1px solid #C5A880; padding-top: 20px; display: flex; flex-direction: column; gap: 12px;">
+      <p class="display" style="font-size: 25px; font-weight: 400;">Two-Bedroom Apartment with Lounge — PKR 17,000 per night, plus applicable taxes</p>
+      <p style="margin: 0; color: #BFB3A0; font-size: 16px;">Occupancy and availability should be confirmed directly with the property.</p>
+    </div>
+    <p style="margin: 0; font-size: 13px; color: #BFB3A0;">The standard six may be two adults and four children, or four adults and two children. Rates as of October 2026, subject to change.</p>
+  </section>
+
+  <footer style="background: #221F1B; border-top: 1px solid rgba(197,168,128,.35); padding: 48px 16px 32px; display: flex; flex-direction: column; gap: 24px; font-size: 15px; color: #BFB3A0;">
+    <div style="display: inline-flex; flex-direction: column; gap: 8px; align-self: flex-start; color: #F3EEE3;"><span style="letter-spacing: .22em;">CRYSTAL ROYAL</span><span style="height: 1px; background: #C5A880;"></span><span style="font-size: 10px; letter-spacing: .5em; font-weight: 500;">APARTMENT</span></div>
+    <span>WhatsApp <span class="ph">[+92 XXX XXXXXXX]</span></span>
+    <nav aria-label="Legal" style="display: flex; gap: 20px;"><a href="#" style="color: #F3EEE3;">House rules</a><a href="#" style="color: #F3EEE3;">Privacy</a><a href="#" style="color: #F3EEE3;">Terms</a></nav>
+    <span style="font-size: 13px;">Payments by bank transfer to Meezan Bank; no card details are ever requested.</span>
+  </footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":6200}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      apts: [
+        { eyebrow: '3 bedrooms · lounge', name: 'Three-Bedroom Apartment with Lounge', rate: 'PKR 25,000', occ: 'Sleeps 6 as standard, up to 8. Guests 7 and 8 PKR 5,000 each per night.', photo: 'Photo · three-bedroom lounge at dusk · 1200 × 900', cta: 'Reserve', reserveHref: 'ReserveMobile.dc.html' },
+        { eyebrow: '2 bedrooms · lounge', name: 'Two-Bedroom Apartment with Lounge', rate: 'PKR 17,000', occ: 'Occupancy and availability are confirmed directly with the property.', photo: 'Photo · two-bedroom lounge at dusk · 1200 × 900', cta: 'Ask us', reserveHref: '#' }
+      ],
+      amenities: [
+        { name: 'Airport transfer', unit: 'per trip' }, { name: 'Breakfast for the party', unit: 'per guest per night' },
+        { name: 'Daily housekeeping', unit: 'per night' }, { name: 'Early check-in', unit: 'per stay' },
+        { name: 'Late check-out', unit: 'per stay' }, { name: 'Extra bedding or cot', unit: 'per night' },
+        { name: 'Kitchen pre-stocked', unit: 'per stay' }, { name: 'Driver on call', unit: 'per day' }
+      ],
+      steps: [
+        { n: 'i', title: 'Choose dates', body: 'Pick your nights and your party.' },
+        { n: 'ii', title: 'Add what you need', body: 'Transfers, breakfast, a driver. All optional.' },
+        { n: 'iii', title: 'Reserve', body: 'We hold your dates for 12 hours.' },
+        { n: 'iv', title: 'Settle by transfer', body: 'Meezan Bank transfer, then send the receipt. Confirmed within hours.' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>
