@@ -233,8 +233,14 @@ describe("GET /api/cron/receipt-retention", () => {
     const r = await insertReservation(sql, { typeId: f.threeId, unitId: f.unitA, checkIn: "2024-01-01", checkOut: "2024-01-03", status: "completed" });
     await sql`insert into payments (reservation_id, amount, receipt_path, receipt_status) values (${r.id}, 1, '../../etc/passwd', 'verified')`;
     const quiet = vi.spyOn(console, "error").mockImplementation(() => undefined);
-    const res = await call(receiptRetention).finally(() => quiet.mockRestore());
-    expect(quiet).toHaveBeenCalledOnce();
+    let res: Response;
+    try {
+      res = await call(receiptRetention);
+      // The refusal is logged once. (Read the call count before mockRestore(), which clears it.)
+      expect(quiet).toHaveBeenCalledOnce();
+    } finally {
+      quiet.mockRestore();
+    }
     expect(await res.json()).toEqual({ ok: true, deleted: 0, missing: 0, failed: 1, remaining: 1 });
     const [p] = await sql`select receipt_path from payments where reservation_id = ${r.id}`;
     expect(p.receipt_path).toBe("../../etc/passwd");
