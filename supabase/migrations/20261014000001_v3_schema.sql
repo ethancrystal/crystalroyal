@@ -1,9 +1,9 @@
 -- Crystal Royal Apartment, booking schema v3: apartment types, units, stones, exclusion constraint.
--- Written to run on a fresh database. The live project currently holds the earlier apartments-only schema
--- (no reservations); see docs/MIGRATING.md before applying it there.
+-- Run after 20261014000000_v3_drop_v2.sql on the live project (or alone on a fresh database).
 
-create extension if not exists btree_gist;
-create extension if not exists pgcrypto;
+create extension if not exists btree_gist with schema extensions;
+create extension if not exists pgcrypto with schema extensions;
+create schema if not exists private;
 
 do $$ begin
   create type stone as enum ('lapis', 'jade');
@@ -18,7 +18,7 @@ do $$ begin
   create type receipt_status as enum ('submitted','verified','rejected','none');
 exception when duplicate_object then null; end $$;
 
-create or replace function set_updated_at() returns trigger language plpgsql as $$
+create or replace function set_updated_at() returns trigger language plpgsql set search_path = public as $$
 begin new.updated_at = now(); return new; end $$;
 
 create table apartment_types (
@@ -220,6 +220,11 @@ create table activity_log (
 
 create index on reservations (apartment_type_id, check_in, check_out);
 create index on reservations (status, hold_expires_at);
+create index on reservations (unit_id);
+create index on units (apartment_type_id);
+create index on rates (apartment_type_id, effective_from);
+create index on unit_blocks (unit_id);
+create index on reservation_amenities (amenity_id);
 create index on payments (reservation_id);
 create index on activity_log (reservation_id, created_at);
 
@@ -244,26 +249,28 @@ alter table payments enable row level security;
 alter table admins enable row level security;
 alter table activity_log enable row level security;
 
-create or replace function is_admin() returns boolean
-language sql stable security definer set search_path = public as $$
-  select exists (select 1 from admins where user_id = auth.uid() and active)
+-- Kept out of the exposed API schema; policies call it.
+create or replace function private.is_admin() returns boolean
+language sql stable security definer set search_path = public, extensions as $$
+  select exists (select 1 from admins where user_id = (select auth.uid()) and active)
 $$;
-revoke all on function is_admin() from public;
-grant execute on function is_admin() to authenticated;
+grant usage on schema private to authenticated;
+revoke all on function private.is_admin() from public, anon;
+grant execute on function private.is_admin() to authenticated;
 
 do $$
 declare t text;
 begin
   foreach t in array array['apartment_types','units','rates','amenities','unit_blocks','settings','reservations',
                            'reservation_amenities','payments','activity_log'] loop
-    execute format('create policy admin_all on %I for all to authenticated using (is_admin()) with check (is_admin())', t);
+    execute format('create policy admin_all on %I for all to authenticated using ((select private.is_admin())) with check ((select private.is_admin()))', t);
   end loop;
 end $$;
-create policy admin_read_self on admins for select to authenticated using (user_id = auth.uid());
+create policy admin_read_self on admins for select to authenticated using (user_id = (select auth.uid()));
 
 -- Pure status table, mirrored by src/lib/status.ts.
 create or replace function transition_allowed(f reservation_status, t reservation_status) returns boolean
-language sql immutable as $$
+language sql immutable set search_path = public as $$
   select case f
     when 'reserved' then t in ('payment_submitted','confirmed','cancelled','expired')
     when 'payment_submitted' then t in ('confirmed','reserved','cancelled')
@@ -275,15 +282,15 @@ $$;
 -- The application never updates status directly.
 create or replace function transition_reservation(
   p_id uuid, p_to reservation_status, p_actor text, p_actor_id text, p_detail jsonb default '{}'
-) returns reservations language plpgsql security definer set search_path = public as $$
-declare r reservations; hours int;
+) returns reservations language plpgsql security definer set search_path = public, extensions as $$
+declare r reservations; v_hours int;
 begin
   select * into r from reservations where id = p_id for update;
   if not found then raise exception 'reservation not found'; end if;
   if not transition_allowed(r.status, p_to) then
     raise exception 'A reservation cannot move from % to %', r.status, p_to using errcode = 'P0001';
   end if;
-  select hold_hours into hours from settings where id;
+  select hold_hours into v_hours from settings where id;
   update reservations set
     status = p_to,
     confirmed_at = case when p_to = 'confirmed' then now() else confirmed_at end,
@@ -293,7 +300,7 @@ begin
     cancel_reason = case when p_to = 'cancelled' then p_detail->>'reason' else cancel_reason end,
     -- receipt rejected: hold extended once
     hold_expires_at = case when r.status = 'payment_submitted' and p_to = 'reserved' and not r.hold_extended
-                           then now() + make_interval(hours => hours) else hold_expires_at end,
+                           then now() + make_interval(hours => v_hours) else hold_expires_at end,
     hold_extended = case when r.status = 'payment_submitted' and p_to = 'reserved' then true else hold_extended end
   where id = p_id returning * into r;
   insert into activity_log (reservation_id, actor, actor_id, action, detail)
@@ -304,7 +311,7 @@ revoke all on function transition_reservation(uuid, reservation_status, text, te
 
 -- Is a unit free for every night of [p_in, p_out)?
 create or replace function unit_is_free(p_unit uuid, p_in date, p_out date, p_ignore uuid default null)
-returns boolean language sql stable as $$
+returns boolean language sql stable set search_path = public, extensions as $$
   select not exists (
     select 1 from reservations r
     where r.unit_id = p_unit and r.id is distinct from p_ignore
@@ -315,20 +322,22 @@ returns boolean language sql stable as $$
     where b.unit_id = p_unit and daterange(b.starts_on, b.ends_on, '[)') && daterange(p_in, p_out, '[)')
   )
 $$;
+revoke all on function unit_is_free(uuid, date, date, uuid) from public, anon, authenticated;
 
 -- Per-night availability for a type: true when at least one active unit is free that night. No guest data.
 create or replace function type_night_availability(p_type uuid, p_from date, p_to date)
-returns table (night date, available boolean) language sql stable as $$
+returns table (night date, available boolean) language sql stable set search_path = public, extensions as $$
   select d::date, exists (
     select 1 from units u where u.apartment_type_id = p_type and u.active and unit_is_free(u.id, d::date, d::date + 1)
-  ) from generate_series(p_from, p_to - 1, interval '1 day') d
+  ) from generate_series(p_from::timestamp, (p_to - 1)::timestamp, interval '1 day') d
 $$;
+revoke all on function type_night_availability(uuid, date, date) from public, anon, authenticated;
 
 -- One transaction: serialise per type, validate, assign the lowest-sorted free unit, allocate the reference, insert.
 -- Totals come from the caller (the server recomputes with priceStay() from database rows before calling).
 -- Returns (ok, reservation, error): a clean "not available" result, never an exception, when no unit is free.
 create or replace function create_reservation(p jsonb)
-returns jsonb language plpgsql security definer set search_path = public as $$
+returns jsonb language plpgsql security definer set search_path = public, extensions as $$
 declare
   t apartment_types; v_unit uuid; v_ref text; v_token text; v_yymm text; v_n int; v_hours int;
   v_in date := (p->>'check_in')::date; v_out date := (p->>'check_out')::date;
@@ -381,7 +390,7 @@ revoke all on function create_reservation(jsonb) from public, anon, authenticate
 
 -- Cron: expire past-due holds only. Idempotent.
 create or replace function expire_holds() returns setof reservations
-language plpgsql security definer set search_path = public as $$
+language plpgsql security definer set search_path = public, extensions as $$
 declare r record;
 begin
   for r in select id from reservations where status = 'reserved' and hold_expires_at < now() for update skip locked loop
