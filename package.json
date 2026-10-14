@@ -11,7 +11,8 @@
     "test:e2e": "playwright test",
     "db:up": "bash tests/db/pg-up.sh",
     "test:db": "vitest run --config vitest.db.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "export:reservations": "node scripts/export-reservations.mjs"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
