@@ -172,7 +172,7 @@ export async function requestCancellation(_prev: CancelResult, formData: FormDat
   if (r.cancellation_requested_at) return { status: "sent" };
 
   try {
-    await markCancellationRequested(r.id);
+    await markCancellationRequested(r.id, parsed.data.reason);
   } catch (e) {
     console.error("cancellation request failed", e);
     return { status: "error", message: "We could not send your request. Try again, or WhatsApp us." };

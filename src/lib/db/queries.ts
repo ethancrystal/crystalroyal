@@ -233,9 +233,9 @@ export async function transition(
   }
 }
 
-export async function requestCancellation(id: string): Promise<void> {
+export async function requestCancellation(id: string, reason?: string): Promise<void> {
   await sql()`update reservations set cancellation_requested_at = now() where id = ${id} and cancellation_requested_at is null`;
-  await logActivity({ reservation_id: id, actor: "guest", actor_id: null, action: "cancellation_requested", detail: {} });
+  await logActivity({ reservation_id: id, actor: "guest", actor_id: null, action: "cancellation_requested", detail: reason ? { reason } : {} });
 }
 
 export async function logActivity(e: Omit<ActivityEntry, "id" | "created_at">): Promise<void> {

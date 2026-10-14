@@ -111,7 +111,7 @@ describe("subjects (copy deck)", () => {
 
   // Enable once stayRange() in src/lib/emails.ts writes both months for a stay that crosses a month end
   // (requested in the ops report); today it reads "30 to 2 December".
-  it.skip("a stay across a month end names both months", async () => {
+  it("a stay across a month end names both months", async () => {
     const s = (await render("confirmed", {}, { check_in: "2026-11-30", check_out: "2026-12-02" })).subject;
     expect(s).toBe("Your stay is confirmed — 30 November to 2 December");
   });

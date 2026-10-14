@@ -16,7 +16,7 @@ export async function POST(request: NextRequest) {
     }
   }
   const res = NextResponse.redirect(new URL("/admin/login", request.url), 303);
-  res.cookies.set(LOCAL_ADMIN_COOKIE, "", { path: "/admin", maxAge: 0, httpOnly: true, sameSite: "lax" });
+  res.cookies.set(LOCAL_ADMIN_COOKIE, "", { path: "/", maxAge: 0, httpOnly: true, sameSite: "lax" });
   res.headers.set("X-Robots-Tag", "noindex, nofollow");
   res.headers.set("Cache-Control", "no-store");
   return res;

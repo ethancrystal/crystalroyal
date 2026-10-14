@@ -45,7 +45,7 @@ October 2026 rates, the eight sample amenities without prices, placeholder setti
 | `npm run typecheck` | TypeScript over the whole repository | nothing |
 | `npm test` | Unit tests (`tests/*.test.ts`, `tests/unit/`): pricing and the worked totals, quotes, dates in Karachi time, money, signed cookies, receipt sniffing, email subjects, the cron guard, calendar logic | nothing |
 | `npm run test:db` | Database tests (`tests/db/`): the no-double-booking constraint, unit assignment, blocks, every status transition, hold expiry, references, ten simultaneous reservations, and both cron routes | PostgreSQL 16 binaries |
-| `npm run test:e2e` | Playwright, desktop and mobile: reserve, pay, upload, verify, "Not available", a party of nine, "Hold ended", the two-bedroom enquiry | a running site and its database |
+| `npm run test:e2e` | Playwright, desktop and mobile: reserve, pay, upload, verify, "Not available", a party of nine, "Hold ended", the two-bedroom enquiry, each apartment's stone | a running site and its database |
 
 **Database tests** start their own throwaway cluster (127.0.0.1:54330 in `/tmp/crystalroyal-pgtest-ops`; change
 with `DBTEST_PORT` and `DBTEST_DIR`), load the migrations and seed, and stop it at the end. They never touch the
@@ -63,7 +63,8 @@ npm run test:e2e
 
 The tests create reservations with guest emails `e2e+…@example.com` on 2 to 5 November 2026 (three weeks ahead once
 that date has passed) and remove them at the end (`E2E_KEEP=1` keeps them to look at). The three-bedroom must be free
-on those nights. Against a deployed preview, set `E2E_BASE_URL`, `DATABASE_URL`, Turnstile test keys and an admin
+on those nights. The admin steps sign in once per project with `LOCAL_ADMIN_PASSWORD`; the console allows five
+sign-in attempts in 15 minutes, so after several runs in a row restart the dev server (the counter is in memory). Against a deployed preview, set `E2E_BASE_URL`, `DATABASE_URL`, Turnstile test keys and an admin
 sign-in that works there.
 
 **CI** (`.github/workflows/ci.yml`): every push runs typecheck, unit tests, the production build and the database
@@ -148,8 +149,8 @@ on conflict (user_id) do update set active = true, email = excluded.email;
 
 Both require `Authorization: Bearer <CRON_SECRET>` (Vercel adds it) and are safe to run again. To run one by hand:
 `curl -H "Authorization: Bearer $CRON_SECRET" https://<your domain>/api/cron/expire-holds`.
-Vercel's Hobby plan runs scheduled jobs at most once a day; the 15-minute hold expiry needs the Pro plan, or any
-external scheduler calling the route with the secret.
+At the time of writing, Vercel's Hobby plan allows scheduled jobs to run only once a day; the 15-minute hold expiry
+needs the Pro plan, or any external scheduler calling the route with the secret.
 
 ## Backups
 
@@ -166,8 +167,8 @@ npm run -s export:reservations > reservations-$(date +%F).csv     # uses DATABAS
 ## Owner's guide
 
 Everything below happens in the console at `https://<your domain>/admin`. Sign in with your email; you receive a
-link that signs you in on that device. Every action you take is recorded on the reservation's activity list with
-your name. All dates and times are Karachi time.
+link that signs you in on that device. Every action you take is recorded on the reservation's activity list, with
+who did it and when. All dates and times are Karachi time.
 
 **Each morning**, the Dashboard shows today's arrivals and departures, receipts waiting for you (oldest first), holds
 ending soon, the next 30 days' occupancy and this month's revenue before tax.
@@ -311,14 +312,14 @@ Defaults come from `supabase/migrations/20261014000001_v3_schema.sql`.
 | Phone, as guests see it | Property | `[+92 XXX XXXXXXX]` |
 | Reservations email | Property | `[reservations@crystalroyalapartment.com]` |
 | Owner alerts email | Property | `[owner@crystalroyalapartment.com]` (owner emails are skipped until set) |
-| Hold hours, deposit policy, keep receipts | Property | 12 hours, full payment, 12 months: confirm |
+| Hold, hours · Deposit policy · Keep receipts, months · Shortest and longest stay | Property | 12 hours, full payment, 12 months, 1 to 30 nights: confirm |
 | Account title | Bank details | `[Crystal Royal Apartment]` |
 | Account number | Bank details | `[__________]` |
 | IBAN | Bank details | `[PK__ MEZN ____ ____ ____ ____]` |
 | Branch | Bank details | `[Branch name and code]` |
 | SWIFT | Bank details | `[MEZNPKKA — confirm]` |
 | Raast ID | Bank details | `[optional Raast ID or mobile number]` |
-| Two-bedroom standard and maximum guests | Rates | empty: not reservable online until set |
+| Two-bedroom standard and maximum guests | Rates | empty: not reservable online until set; until then its page shows `[Occupancy to be confirmed]` and "Ask on WhatsApp" |
 | Two-bedroom extra adult per night | Rates | none (`[__ or none]` in the brief) |
 | Bathrooms, bed configuration, size in sq ft (both apartments) | Rates | empty, shown as `[__]` |
 | Unit names and how many units | Units | one unit each, named "Three-bedroom apartment" and "Two-bedroom apartment" |

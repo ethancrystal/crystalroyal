@@ -37,9 +37,9 @@ export async function SiteFooter() {
           <span className="eyebrow" style={{ color: "var(--color-gold)" }}>
             The fine print
           </span>
-          <Link href="/house-rules">House rules</Link>
-          <Link href="/privacy">Privacy</Link>
-          <Link href="/terms">Terms</Link>
+          <Link href="/house-rules" className="inline-flex min-h-[44px] items-center">House rules</Link>
+          <Link href="/privacy" className="inline-flex min-h-[44px] items-center">Privacy</Link>
+          <Link href="/terms" className="inline-flex min-h-[44px] items-center">Terms</Link>
         </nav>
       </div>
       <div

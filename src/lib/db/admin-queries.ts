@@ -862,6 +862,10 @@ export async function createBlock(
       return block;
     });
   } catch (e) {
+    if (pgCode(e) === "23P01") {
+      const m = "Some of those nights are already blocked.";
+      throw new AdminError(m, { startsOn: m });
+    }
     mapDbError(e, { exclusion: "Some of those nights are already blocked." });
   }
 }

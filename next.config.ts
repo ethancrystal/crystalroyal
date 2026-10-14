@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
         source: "/reservation/:path*",
         headers: [
           { key: "X-Robots-Tag", value: "noindex, nofollow" },
-          { key: "Referrer-Policy", value: "no-referrer" },
+          { key: "Referrer-Policy", value: "same-origin" },
           { key: "Cache-Control", value: "private, no-store" },
         ],
       },

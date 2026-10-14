@@ -35,7 +35,7 @@ export function SiteHeader({
               style={{ fontSize: 13, letterSpacing: ".14em", textTransform: "uppercase" }}
             >
               {NAV.map((n) => (
-                <a key={n.href} href={n.href} className="no-underline hover:text-[var(--color-facet)]">
+                <a key={n.href} href={n.href} className="inline-flex min-h-[44px] items-center no-underline hover:text-[var(--color-facet)]">
                   {n.label}
                 </a>
               ))}
@@ -48,7 +48,7 @@ export function SiteHeader({
         ) : null}
         {variant === "crumb" && crumb ? (
           <nav aria-label="Breadcrumb" className="ml-auto" style={{ fontSize: 13, color: "var(--color-on-dark-2)" }}>
-            <Link href="/" style={{ color: "var(--color-on-dark-2)" }}>
+            <Link href="/" className="inline-flex min-h-[44px] items-center" style={{ color: "var(--color-on-dark-2)" }}>
               {crumb.label}
             </Link>{" "}
             · <span aria-current="page">{crumb.current}</span>

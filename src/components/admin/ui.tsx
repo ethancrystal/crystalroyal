@@ -756,7 +756,7 @@ export function describeActivity(e: Pick<ActivityEntry, "actor" | "action" | "de
       case "payment_submitted":
         return "Receipt uploaded by guest.";
       case "confirmed":
-        return "Payment verified, stay confirmed.";
+        return str(d.method) ? "Payment recorded, stay confirmed." : "Payment verified, stay confirmed.";
       case "reserved":
         return reason ? `Receipt rejected: ${reason} Returned to Reserved.` : "Returned to Reserved.";
       case "cancelled":
@@ -775,7 +775,9 @@ export function describeActivity(e: Pick<ActivityEntry, "actor" | "action" | "de
     case "created":
       return e.actor === "admin" ? "Reservation added by admin." : "Reserved online.";
     case "cancellation_requested":
-      return "Guest asked to cancel.";
+      return reason ? `Guest asked to cancel: ${reason}` : "Guest asked to cancel.";
+    case "receipt:additional":
+      return "Another receipt uploaded by guest.";
     case "unit_moved":
       return `Moved from ${str(d.from_name) || "another unit"} to ${str(d.to_name) || "another unit"}.`;
     case "note_added":

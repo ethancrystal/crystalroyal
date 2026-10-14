@@ -7,7 +7,7 @@ import { useId } from "react";
 
 export interface StepperProps {
   label: string;
-  hint?: string;
+  hint?: React.ReactNode;
   value: number;
   min: number;
   max: number;

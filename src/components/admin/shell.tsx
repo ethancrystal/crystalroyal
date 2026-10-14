@@ -15,12 +15,15 @@ export const ADMIN_NAV: { href: string; label: string }[] = [
   { href: "/admin/reservations", label: "Reservations" },
   { href: "/admin/reservations/new", label: "New reservation" },
   { href: "/admin/calendar", label: "Calendar and blocks" },
+  { href: "/admin/settings/amenities", label: "Amenities" },
+  { href: "/admin/settings/rates", label: "Rates" },
   { href: "/admin/settings", label: "Settings" },
 ];
 
 function isCurrent(pathname: string, href: string): boolean {
   if (href === "/admin") return pathname === "/admin" || pathname === "/admin/";
   if (href === "/admin/reservations") return pathname.startsWith(href) && !pathname.startsWith("/admin/reservations/new");
+  if (href === "/admin/settings") return pathname.startsWith(href) && !/^\/admin\/settings\/(amenities|rates)/.test(pathname);
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 

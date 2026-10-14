@@ -27,7 +27,8 @@ export interface EmailContext {
 function stayRange(r: Reservation): string {
   const a = formatDate(r.check_in, { weekday: undefined, year: undefined, month: "long" });
   const b = formatDate(r.check_out, { weekday: undefined, year: undefined, month: "long" });
-  return `${a.split(" ")[0]} to ${b}`;
+  const sameMonth = a.split(" ").slice(1).join(" ") === b.split(" ").slice(1).join(" ");
+  return `${sameMonth ? a.split(" ")[0] : a} to ${b}`;
 }
 
 function esc(s: string): string {

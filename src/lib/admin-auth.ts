@@ -103,7 +103,7 @@ export async function startLocalSession(email: string, password: string): Promis
     httpOnly: true,
     sameSite: "lax",
     secure: env.isProduction,
-    path: "/admin",
+    path: "/",
     maxAge: LOCAL_SESSION_MS / 1000,
   });
   return true;

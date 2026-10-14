@@ -1,3 +1,5 @@
+import { rm } from "node:fs/promises";
+import path from "node:path";
 import { expect, test, type Page } from "@playwright/test";
 import postgres from "postgres";
 
@@ -9,6 +11,7 @@ import postgres from "postgres";
 //  3. A party of nine is refused with the exact message.
 //  4. An expired hold shows "Hold ended" with the reserve-again link (the hold is expired through SQL).
 //  5. The two-bedroom, whose occupancy is not yet confirmed, offers "Ask on WhatsApp" instead of reserving.
+//  6. Each apartment page carries its stone: data-stone="lapis" (three-bedroom) and "jade" (two-bedroom).
 // Rows the tests create carry guest emails e2e+…@example.com (and blocks the note 'e2e'); they are removed before
 // each run, so the suite can be repeated against the same database.
 
@@ -55,7 +58,15 @@ test.afterAll(async () => {
 });
 
 async function tidy() {
-  await db()`delete from reservations where guest_email like 'e2e+%@example.com'`;
+  const mine = await db()<{ id: string }[]>`select id from reservations where guest_email like 'e2e+%@example.com'`;
+  const ids = mine.map((r) => r.id);
+  if (ids.length > 0) {
+    // activity_log keeps its rows when a reservation goes (on delete set null): remove them with it.
+    await db()`delete from activity_log where reservation_id in ${db()(ids)}`;
+    await db()`delete from reservations where id in ${db()(ids)}`;
+    // Receipts uploaded to a development server are files under .data/receipts/{reservation id}/.
+    await Promise.all(ids.map((id) => rm(path.join(__dirname, "..", ".data", "receipts", id), { recursive: true, force: true })));
+  }
   await db()`delete from unit_blocks where note = 'e2e'`;
 }
 
@@ -150,7 +161,12 @@ test.describe("reserve, pay, verify", () => {
       await page.getByLabel("Email").fill(ADMIN_EMAIL);
       await page.getByLabel("Password").fill(ADMIN_PASSWORD!);
       await page.getByRole("button", { name: "Sign in", exact: true }).click();
-      await page.waitForURL((u) => u.pathname.startsWith("/admin") && !u.pathname.startsWith("/admin/login"));
+      // Signed in (the console), or sent back to the form with an error code.
+      await page.waitForURL((u) => u.pathname.startsWith("/admin") && (!u.pathname.startsWith("/admin/login") || u.searchParams.has("error")));
+      expect(
+        new URL(page.url()).searchParams.get("error"),
+        "Admin sign-in was refused. After five attempts in 15 minutes the console says 'rate': restart the server (the counter is in memory) or wait.",
+      ).toBeNull();
     });
 
     await test.step("verify and confirm", async () => {
@@ -255,5 +271,12 @@ test.describe("refusals and states", () => {
     await expect(page.getByText("Ask on WhatsApp").filter({ visible: true }).first()).toBeVisible();
     await expect(page.getByRole("link", { name: "Reserve this stay" })).toHaveCount(0);
     await expect(page.getByRole("button", { name: "Reserve this stay" })).toHaveCount(0);
+  });
+
+  test("each apartment page carries its stone", async ({ page }) => {
+    await page.goto("/apartments/three-bedroom");
+    await expect(page.locator("main[data-stone]")).toHaveAttribute("data-stone", "lapis");
+    await page.goto("/apartments/two-bedroom");
+    await expect(page.locator("main[data-stone]")).toHaveAttribute("data-stone", "jade");
   });
 });

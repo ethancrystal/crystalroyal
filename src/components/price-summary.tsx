@@ -58,7 +58,7 @@ export function PriceSummary({
               {line.amount !== null ? (
                 line.amount
               ) : (
-                <span style={{ fontSize: 13, color: muted }}>
+                <span style={{ fontSize: 13, color: muted, display: "inline-block", maxWidth: 150 }}>
                   {line.placeholder ? (
                     <>
                       <Ph value={line.placeholder} />{" "}
@@ -72,11 +72,9 @@ export function PriceSummary({
         ))}
         {!folio ? (
           <>
-            <dt style={{ fontWeight: 500, paddingTop: 8, borderTop: `1px solid ${rule}` }}>{ledger.totalLabel}</dt>
-            <dd
-              className="num whitespace-nowrap"
-              style={{ margin: 0, textAlign: "right", paddingTop: 8, borderTop: `1px solid ${rule}`, fontSize: 20 }}
-            >
+            <div aria-hidden="true" style={{ gridColumn: "1 / -1", borderTop: `1px solid ${rule}`, height: 0 }} />
+            <dt style={{ fontWeight: 500 }}>{ledger.totalLabel}</dt>
+            <dd className="num whitespace-nowrap" style={{ margin: 0, textAlign: "right", fontSize: 20 }}>
               PKR {ledger.total}
             </dd>
             {ledger.due ? (
