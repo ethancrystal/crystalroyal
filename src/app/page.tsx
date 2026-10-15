@@ -103,6 +103,7 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
               aspectRatio="4 / 5"
               sizes="(max-width: 900px) 100vw, 480px"
               priority
+              objectPosition="62% center"
               creditColor="var(--color-on-dark-2)"
               className="max-[900px]:[&>div]:aspect-[4/3]!"
               style={{ flex: "1 1 400px", maxWidth: 520 }}

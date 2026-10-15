@@ -10,6 +10,7 @@ export function PhotoFigure({
   className = "",
   style,
   creditColor = "var(--color-ink-2)",
+  objectPosition = "center",
 }: {
   photo: Photo;
   aspectRatio: string;
@@ -18,11 +19,13 @@ export function PhotoFigure({
   className?: string;
   style?: React.CSSProperties;
   creditColor?: string;
+  /** Which part of the photo stays in frame when the ratio crops it, e.g. "62% center" to keep the towers in a narrow crop. */
+  objectPosition?: string;
 }) {
   return (
     <figure className={`m-0 flex flex-col gap-2 ${className}`} style={style}>
       <div className="relative w-full overflow-hidden" style={{ aspectRatio }}>
-        <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} className="object-cover" />
+        <Image src={photo.src} alt={photo.alt} fill sizes={sizes} priority={priority} className="object-cover" style={{ objectPosition }} />
       </div>
       <figcaption className="text-[12px]" style={{ color: creditColor }}>
         Photo by{" "}
