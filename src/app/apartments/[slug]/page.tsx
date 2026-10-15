@@ -19,6 +19,7 @@ import { getApartmentTypeBySlug, getSettings, type TypeWithRate } from "@/lib/db
 import { todayInKarachi } from "@/lib/dates";
 import { env } from "@/lib/env";
 import { formatPKR } from "@/lib/money";
+import { INTERIORS } from "@/lib/photos";
 import { OCCUPANCY_UNCONFIRMED, isReservable } from "@/lib/quote";
 import { APARTMENT_CONTENT, SITE } from "@/lib/site";
 
@@ -148,7 +149,7 @@ export default async function ApartmentPage({ params }: { params: Params }) {
       />
       <SiteHeader variant="crumb" crumb={{ label: "Home", current: crumbName(type.slug) }} />
       <main id="main" className="on-ivory" data-stone={type.stone}>
-        {content ? <Gallery hero={content.photos.hero} small={content.photos.small} /> : null}
+        {content ? <Gallery hero={content.photos.hero} small={content.photos.small} photos={INTERIORS[type.slug]} /> : null}
 
         <div className="container-site grid pt-14 pb-[120px] max-[900px]:pt-8 max-[900px]:pb-16 lg:grid-cols-[minmax(0,1fr)_380px] lg:gap-x-16 lg:gap-y-14">
           {/* Title and facts */}

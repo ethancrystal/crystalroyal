@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { TypeWithRate } from "@/lib/db/queries";
 import { formatPKR } from "@/lib/money";
+import { INTERIORS } from "@/lib/photos";
 import { isReservable } from "@/lib/quote";
 import { APARTMENT_CONTENT } from "@/lib/site";
 import { Ph } from "@/components/ph";
@@ -49,6 +50,8 @@ function ApartmentCard({ type, whatsappNumber }: { type: TypeWithRate; whatsappN
     <article className="on-ivory-2 flex flex-col">
       <Plate
         label={content?.cardPhoto ?? `Photo · ${type.name}`}
+        photo={INTERIORS[type.slug]?.card}
+        sizes="(max-width: 900px) 100vw, 640px"
         className="aspect-[16/10] max-[900px]:aspect-[4/3]"
         style={{ fontSize: 13, letterSpacing: ".08em" }}
       />
