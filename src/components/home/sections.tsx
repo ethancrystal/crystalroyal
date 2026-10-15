@@ -1,5 +1,7 @@
 import { HOW_IT_WORKS, SITE, isPlaceholder } from "@/lib/site";
 import { Ph } from "@/components/ph";
+import { PhotoFigure } from "@/components/photo";
+import { PHOTOS } from "@/lib/photos";
 
 // "How reserving works" and "Location" (Main.dc.html #how and #location, HomeMobile), plus the phone-only sticky
 // bar from the brief ("Two apartments, by the night · Check availability").
@@ -89,19 +91,12 @@ export function Location({ checkIn, checkOut }: { checkIn: string; checkOut: str
             </a>
           ) : null}
         </div>
-        <div
-          className="plate min-h-[380px] max-[900px]:aspect-[4/3] max-[900px]:min-h-0"
-          style={{ flex: "1 1 560px", fontSize: 13, letterSpacing: ".08em", flexDirection: "row", flexWrap: "wrap", gap: 6 }}
-          role="img"
-          aria-label="Map of the address, to be added: a static map without tracking"
-        >
-          Map ·{" "}
-          <span className="hide-sm">
-            <Ph value={SITE.addressLine} /> ·
-          </span>{" "}
-          <span className="hide-sm">static map, no tracking</span>
-          <span className="show-sm">static, no tracking</span>
-        </div>
+        <PhotoFigure
+          photo={PHOTOS.coastline}
+          aspectRatio="16 / 9"
+          sizes="(max-width: 900px) 100vw, 640px"
+          style={{ flex: "1 1 560px", minWidth: 0 }}
+        />
         <p className="show-sm m-0" style={{ fontSize: 15 }}>
           Check-in <Ph value={checkIn} className="num" /> · Check-out <Ph value={checkOut} className="num" />
         </p>

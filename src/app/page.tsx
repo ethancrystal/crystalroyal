@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { FacetedCrystal } from "@/components/brand";
 import { AvailabilityBar } from "@/components/home/availability-bar";
 import { ApartmentCards } from "@/components/home/apartment-cards";
 import { JsonLd } from "@/components/home/json-ld";
 import { HowItWorks, Location, MobileCheckBar } from "@/components/home/sections";
 import { ServiceList } from "@/components/home/service-list";
 import { Ph } from "@/components/ph";
+import { PhotoFigure } from "@/components/photo";
 import { RatesBand } from "@/components/rates-band";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 import { getSettings, listAmenities, listApartmentTypes } from "@/lib/db/queries";
+import { PHOTOS } from "@/lib/photos";
 import { env } from "@/lib/env";
 import { formatNumber, formatPKR } from "@/lib/money";
 import { SITE } from "@/lib/site";
@@ -97,9 +98,16 @@ export default async function Home({ searchParams }: { searchParams: SearchParam
                 check in.<span className="hide-sm"> Reserve by the night; we take care of the rest.</span>
               </p>
             </div>
-            <div className="hide-sm flex justify-center" style={{ flex: "0 1 460px" }}>
-              <FacetedCrystal size={440} />
-            </div>
+            <PhotoFigure
+              photo={PHOTOS.skylineDusk}
+              aspectRatio="4 / 5"
+              sizes="(max-width: 900px) 100vw, 480px"
+              priority
+              objectPosition="62% center"
+              creditColor="var(--color-on-dark-2)"
+              className="max-[900px]:[&>div]:aspect-[4/3]!"
+              style={{ flex: "1 1 400px", maxWidth: 520 }}
+            />
           </div>
 
           {/* Availability bar */}

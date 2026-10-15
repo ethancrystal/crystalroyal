@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { formatPKR } from "@/lib/money";
+import { INTERIORS } from "@/lib/photos";
 import type { PriceBreakdown } from "@/lib/pricing";
 import { OCCUPANCY_UNCONFIRMED } from "@/lib/quote";
 import { APARTMENT_CONTENT } from "@/lib/site";
@@ -81,6 +82,8 @@ export function ResultRow({
     >
       <Plate
         label={content?.cardPhoto ?? `Photo · ${type.name}`}
+        photo={INTERIORS[type.slug]?.card}
+        sizes="(max-width: 768px) 100vw, 540px"
         className="aspect-[4/3] h-full md:aspect-auto md:min-h-[300px]"
       />
       <div className="flex min-w-0 flex-col gap-3.5 p-8 max-[900px]:px-5 max-[900px]:py-6">
