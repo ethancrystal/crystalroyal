@@ -38,6 +38,14 @@ npm run dev          # http://localhost:3000 ; the console is at /admin/login (a
 `npm run db:up` gives you a fresh database every time you run it (two apartment types with one unit each, the
 October 2026 rates, the eight sample amenities without prices, placeholder settings, no reservations).
 
+## Demo data
+
+`supabase/seed.sql` holds the real starting data (two apartments, rates, amenities, settings). For a fully populated demo,
+also run `npm run db:seed-demo` against a local database (it uses `DATABASE_URL`): nine sample reservations in every status,
+payments, a maintenance block and activity history, dated relative to today. Guests are marked "(demo)" and use
+@example.com addresses. Do not run it on the live project: the stays would block real dates. To remove it:
+`delete from reservations where guest_email like '%@example.com'; delete from unit_blocks where note like 'Demo:%';`
+
 ## Tests
 
 | Command | What it runs | Needs |

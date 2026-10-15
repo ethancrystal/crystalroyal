@@ -12,7 +12,8 @@
     "db:up": "bash tests/db/pg-up.sh",
     "test:db": "vitest run --config vitest.db.config.ts",
     "typecheck": "tsc --noEmit",
-    "export:reservations": "node scripts/export-reservations.mjs"
+    "export:reservations": "node scripts/export-reservations.mjs",
+    "db:seed-demo": "psql \"$DATABASE_URL\" -v ON_ERROR_STOP=1 -f supabase/seed-demo.sql"
   },
   "dependencies": {
     "@supabase/ssr": "^0.7.0",
