@@ -13,18 +13,18 @@ const UTM = "?utm_source=crystal_royal&utm_medium=referral";
 
 export const PHOTOS = {
   skylineDusk: {
-    src: "https://images.unsplash.com/photo-1744182896518-fd1233b5c568?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80",
+    src: "https://images.unsplash.com/photo-1744182896518-fd1233b5c568?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=2000",
     alt: "The Karachi skyline at sunset under a golden sky",
     credit: { name: "Tahamie Farooqui", url: `https://unsplash.com/@tami171091${UTM}` },
-    width: 6000,
-    height: 4000,
+    width: 2000,
+    height: 1333,
   },
   coastline: {
-    src: "https://images.unsplash.com/photo-1759323050124-eb669cec0b72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80",
+    src: "https://images.unsplash.com/photo-1759323050124-eb669cec0b72?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=2000",
     alt: "Aerial view of Karachi's high-rises along the Arabian Sea coastline",
     credit: { name: "Tahamie Farooqui", url: `https://unsplash.com/@tami171091${UTM}` },
-    width: 4096,
-    height: 2304,
+    width: 2000,
+    height: 1125,
   },
 } satisfies Record<string, Photo>;
 
