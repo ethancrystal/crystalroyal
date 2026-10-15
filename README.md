@@ -144,7 +144,7 @@ on conflict (user_id) do update set active = true, email = excluded.email;
 
 | Route | When (`vercel.json`) | What it does |
 |---|---|---|
-| `/api/cron/expire-holds` | every 15 minutes | Ends holds whose time has passed and emails "Your hold has ended"; sends the reminder 2 hours before a hold ends (when holds are 4 hours or longer); marks checked-in stays completed the day after check-out. |
+| `/api/cron/expire-holds` | once a day, 03:00 UTC (Vercel Hobby allows daily jobs only) | Sends "Your hold has ended" emails; sends the reminder for holds ending within 2 hours (when holds are 4 hours or longer); marks checked-in stays completed the day after check-out. Holds are also released the moment someone checks availability or reserves, so an unpaid hold never blocks dates past its deadline. On the Pro plan, change the schedule in `vercel.json` to `*/15 * * * *` for prompt reminders. |
 | `/api/cron/receipt-retention` | the 1st of each month, 21:30 UTC (02:30 PKT on the 2nd) | Deletes transfer receipts "Keep receipts, months" after check-out and records each deletion on the reservation. The payment record stays. |
 
 Both require `Authorization: Bearer <CRON_SECRET>` (Vercel adds it) and are safe to run again. To run one by hand:

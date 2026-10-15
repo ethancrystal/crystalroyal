@@ -1,9 +1,9 @@
 import { db } from "@/lib/db/sql";
-import { completeFinishedStays, expireHolds, getSettings, holdsNeedingReminder } from "@/lib/db/queries";
+import { completeFinishedStays, expireHolds, expiredNeedingEmail, getSettings, holdsNeedingReminder } from "@/lib/db/queries";
 import { notify } from "@/lib/notify";
 import { CRON_HEADERS, refuseUnlessCron } from "../authorize";
 
-// GET /api/cron/expire-holds — Vercel Cron, every 15 minutes (vercel.json). Requires Authorization: Bearer CRON_SECRET.
+// GET /api/cron/expire-holds — Vercel Cron, once a day on the Hobby plan (vercel.json). Requires Authorization: Bearer CRON_SECRET.
 //  1. Expires `reserved` holds past hold_expires_at (expire_holds(), via transition_reservation) and emails each
 //     guest "Your hold has ended" with a reserve-again link for the same type and dates.
 //  2. When settings.hold_hours >= 4, sends the reminder to holds ending within the next 2 hours that have not had one.
@@ -26,7 +26,9 @@ export async function GET(req: Request) {
   try {
     const settings = await getSettings();
 
-    const expired = await expireHolds();
+    await expireHolds();
+    // Includes holds already released by an availability check, which does not send the email.
+    const expired = await expiredNeedingEmail();
     if (expired.length > 0) {
       const slugs = await typeSlugs();
       for (const r of expired) {

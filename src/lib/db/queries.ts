@@ -69,17 +69,37 @@ export async function listUnits(typeId?: string): Promise<Unit[]> {
 
 // ---------- Availability (no guest data) ----------
 
+/**
+ * Releases holds past their deadline. The scheduled job only runs once a day on Vercel's free plan, so availability
+ * checks and new reservations call this first; an unpaid hold never blocks dates past its deadline. Throttled
+ * per server instance; the database function is idempotent. The "hold ended" email is sent by the daily job.
+ */
+let lastSweep = 0;
+export async function sweepExpiredHolds(): Promise<void> {
+  const now = Date.now();
+  if (now - lastSweep < 15_000) return;
+  lastSweep = now;
+  try {
+    await sql()`select count(*) from expire_holds()`;
+  } catch (e) {
+    console.error("sweepExpiredHolds failed", e);
+  }
+}
+
+
 export async function nightAvailability(
   typeId: string,
   from: string,
   to: string,
 ): Promise<{ night: string; available: boolean }[]> {
   if (to <= from) return [];
+  await sweepExpiredHolds();
   return sql()<{ night: string; available: boolean }[]>`select night, available from type_night_availability(${typeId}, ${from}, ${to})`;
 }
 
 /** True when at least one active unit of the type is free for every night of [checkIn, checkOut). */
 export async function isTypeAvailable(typeId: string, checkIn: string, checkOut: string): Promise<boolean> {
+  await sweepExpiredHolds();
   const [r] = await sql()<{ ok: boolean }[]>`
     select exists (select 1 from units u where u.apartment_type_id = ${typeId} and u.active
                    and unit_is_free(u.id, ${checkIn}, ${checkOut})) as ok`;
@@ -149,6 +169,7 @@ export type CreateReservationResult =
  * allocates CRA-YYMM-NNNN and inserts. Callers must pass totals computed by quoteStay() from database rows.
  */
 export async function createReservation(input: CreateReservationInput): Promise<CreateReservationResult> {
+  await sweepExpiredHolds();
   const [row] = await sql()<{ r: CreateReservationResult }[]>`select create_reservation(${sql().json(input as never)}) as r`;
   return row.r;
 }
@@ -253,6 +274,14 @@ export async function listActivity(reservationId: string): Promise<ActivityEntry
 /** Expires reserved holds past their deadline. Idempotent. */
 export async function expireHolds(): Promise<Reservation[]> {
   return sql()<Reservation[]>`select * from expire_holds()`;
+}
+
+/** Holds that expired (by the cron or by a lazy sweep) in the last 3 days and have not had the "hold ended" email. */
+export async function expiredNeedingEmail(): Promise<Reservation[]> {
+  return sql()<Reservation[]>`
+    select r.* from reservations r
+    where r.status = 'expired' and r.updated_at > now() - interval '3 days'
+      and not exists (select 1 from activity_log a where a.reservation_id = r.id and a.action like 'email:hold_ended%')`;
 }
 
 /** Reserved holds ending within the next `withinMinutes` that have not had a reminder logged. */
